@@ -1,52 +1,80 @@
-# Coinbase 1h Momentum Alerts → Telegram
+# SITELINE
 
-Scans every online USD/USDC Coinbase product once an hour and pings your
-Telegram when a coin gains >7% in an hour on 2× volume (with a $250k liquidity gate).
-Runs free on GitHub Actions. No server, no Zapier.
+**Aerial site intelligence for Toronto.** Capture footage from above → software counts what's in it → a branded dashboard + report turns the counts into decisions a client pays for.
 
----
-
-## Step 1 — Make your Telegram bot (3 min)
-1. In Telegram, open a chat with **@BotFather**.
-2. Send `/newbot`, follow prompts, pick a name + username.
-3. BotFather replies with a **bot token** like `8123456789:AAH...`. Copy it.
-4. Open a chat with your new bot and send it any message (e.g. "hi").
-   (A bot can't message you until you message it first.)
-
-## Step 2 — Get your chat ID (1 min)
-1. In Telegram, open a chat with **@userinfobot**.
-2. It replies with your numeric **Id** (e.g. `645301122`). Copy it.
-
-## Step 3 — Put the code on GitHub (5 min)
-1. Create a free account at github.com if you don't have one.
-2. Click **New repository** → name it `coinbase-alert` → **Private** → Create.
-3. Click **uploading an existing file** and drag in all 3 files from this folder,
-   keeping the `.github/workflows/` folder structure intact. Commit.
-
-## Step 4 — Add your secrets (2 min)
-In the repo: **Settings → Secrets and variables → Actions → New repository secret.**
-Add two:
-- Name `TELEGRAM_BOT_TOKEN`  → value = the token from Step 1
-- Name `TELEGRAM_CHAT_ID`    → value = the id from Step 2
-
-## Step 5 — Turn it on & test
-1. Go to the **Actions** tab → enable workflows if prompted.
-2. Click **coinbase-1h-alert** → **Run workflow** to fire it once manually.
-3. If any coin currently qualifies you'll get a Telegram ping. If not, that's
-   normal — it'll fire automatically at the top of each hour when something hits.
+This README is the map. Open this first; everything else slots underneath it.
 
 ---
 
-## Tuning (edit the top of crypto_alert.py)
-- `PCT_THRESHOLD = 7.0`   → minimum 1h gain
-- `VOL_MULTIPLE  = 2.0`   → volume spike vs trailing hourly average
-- `USD_VOL_FLOOR = 250000`→ liquidity gate; raise to cut more noise
+## The one-sentence business
+Film from above → count → package → sell. Four steps, one company.
 
-## Notes
-- Times are UTC. "Top of the hour" runs may be delayed a few minutes when
-  GitHub is busy — fine for this use.
-- GitHub disables scheduled workflows after 60 days of zero repo activity;
-  just push any small commit to keep it alive.
-- A handful of Coinbase products may not be tradable on a Canadian retail
-  account. If you ever get a coin you can't trade in-app, ignore it (or add
-  it to a skip-list). This is an alert, not trading advice.
+## What lives where
+
+```
+siteline/
+├── README.md                  ← you are here (the map)
+├── engine/
+│   └── pipeline_a_counter.py  ← the counter. You RUN it, never edit it.
+├── dashboard/
+│   └── index.html             ← the client-facing dashboard (your premium layer)
+├── report/
+│   └── well_report_template.md
+├── site/
+│   └── carrd_copy.md          ← public landing page copy
+├── footage/                   ← clips go here (NOT pushed to GitHub — too big)
+└── output/                    ← CSVs the engine writes (auto-created)
+```
+
+Only ONE file is code (`engine/pipeline_a_counter.py`). The rest are documents and one webpage. You do not need to know Python — you copy-paste commands.
+
+---
+
+## Execution path — two milestones
+
+### Milestone 1 — Prove the loop with footage you ALREADY have
+Goal: watch real numbers travel from clip → CSV → dashboard. This is the moment the whole thing becomes real.
+
+1. Put a clip from your **Downtown Toronto** folder in `footage/`.
+2. Run the engine (see `engine/` guide): `preview`, then `flow` on a street.
+3. It writes `output/flow_counts.csv` and prints an avg-confidence read.
+4. The dashboard gets wired to that CSV → first real end-to-end deliverable.
+
+✅ Done when: the dashboard shows numbers that came out of your own footage.
+
+### Milestone 2 — The flagship
+Goal: a real, sellable product for one site.
+
+1. Shoot **The Well** properly (three near-nadir holds — see the execution guide).
+2. Run the engine on each hold → real counts.
+3. Fill `report/` + the dashboard → branded PDF **and** a live link.
+4. Pitch it: developer/leasing, retail brokers, solar installers.
+
+✅ Done when: you have one link + one PDF you can put in front of a buyer.
+
+---
+
+## Two upgrades in flight (both need Milestone-1 numbers first)
+- **Better video out of the engine** — annotated export with live tally + trajectory trails (the DataFromSky look) on real footage.
+- **Dashboard wired to real counts** — reads `output/*.csv` automatically so each site is a 5-minute generate, not a rebuild.
+
+Neither is speculative — both plug into the CSV that Milestone 1 produces.
+
+---
+
+## Make it live
+```bash
+cd siteline
+git init && git add . && git commit -m "SITELINE home"
+# create the empty repo on github.com first, then:
+git remote add origin https://github.com/juliangentles-coder/siteline.git
+git push -u origin main
+```
+Then deploy `dashboard/` to **GitHub Pages** (free) or **Render** (you already use it) → that URL is the live link you send clients.
+
+> Keep `footage/` out of git — add a `.gitignore` line for `footage/` and `output/`.
+
+---
+
+## Your next action (15 minutes)
+Run the engine on ONE Downtown Toronto clip. That's it. Everything downstream keys off seeing the first real count appear.
