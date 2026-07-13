@@ -1,0 +1,263 @@
+<!-- SITELINE — premium dashboard mockup for aerial site intelligence.
+     Illustrative "The Well" data. The "Generate client insight" button
+     calls Claude live to write the report narrative from the metrics. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<style>
+  :root{
+    --bg:#0D1218; --panel:#151D26; --panel2:#1B2530; --line:#243039;
+    --ink:#EAF0F4; --muted:#7E8C99; --amber:#FFB020; --teal:#3FC7C9; --red:#E5484D;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+    padding:22px;line-height:1.5}
+  .wrap{max-width:1080px;margin:0 auto}
+  .mono{font-family:'JetBrains Mono',monospace}
+  .disp{font-family:'Space Grotesk',sans-serif}
+
+  /* header */
+  header{display:flex;align-items:flex-end;justify-content:space-between;
+    gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:16px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .mark{width:34px;height:34px;flex:none;border:1.5px solid var(--amber);
+    border-radius:7px;display:grid;place-items:center;position:relative}
+  .mark:before{content:"";width:10px;height:10px;border:1.5px solid var(--amber);
+    border-radius:50%}
+  .mark:after{content:"";position:absolute;width:20px;height:1.5px;
+    background:var(--teal);transform:rotate(-38deg)}
+  .brand h1{font-family:'Space Grotesk';font-size:19px;font-weight:700;margin:0;
+    letter-spacing:.14em}
+  .brand .sub{color:var(--muted);font-size:12px;letter-spacing:.04em}
+  .site{text-align:right}
+  .site .name{font-family:'Space Grotesk';font-weight:600;font-size:15px}
+  .site .meta{color:var(--muted);font-size:12px;font-family:'JetBrains Mono'}
+  .chip{display:inline-flex;align-items:center;gap:7px;margin-top:6px;
+    font-family:'JetBrains Mono';font-size:11px;letter-spacing:.12em;
+    color:var(--red);border:1px solid var(--red);border-radius:4px;padding:3px 8px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--red);
+    animation:pulse 1.6s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+  /* metric readouts */
+  .readouts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+  .cell{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:14px 15px}
+  .cell .k{color:var(--muted);font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;font-family:'JetBrains Mono'}
+  .cell .v{font-family:'JetBrains Mono';font-weight:700;font-size:29px;
+    margin-top:8px;line-height:1}
+  .cell .v small{font-size:14px;color:var(--muted);font-weight:500}
+  .cell .d{font-size:11px;margin-top:6px;color:var(--teal)}
+  .cell.amber .v{color:var(--amber)}
+
+  /* two-up */
+  .row{display:grid;grid-template-columns:1.15fr 1fr;gap:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:15px}
+  .card h3{font-family:'Space Grotesk';font-size:12px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 12px;font-weight:600}
+
+  /* footage panel (the signature element) */
+  .feed{position:relative;height:280px;border-radius:8px;overflow:hidden;
+    background:
+      repeating-linear-gradient(90deg,transparent 0 78px,rgba(255,255,255,.05) 78px 82px),
+      linear-gradient(180deg,#20272E,#161C22);}
+  .feed .road{position:absolute;inset:0;
+    background:repeating-linear-gradient(96deg,transparent 0 34px,rgba(255,255,255,.09) 34px 40px)}
+  .veh{position:absolute;border-radius:4px;background:linear-gradient(180deg,#3a4653,#2a333c)}
+  .box{position:absolute;border:1.5px solid var(--amber);border-radius:3px}
+  .box .lbl{position:absolute;top:-17px;left:-1px;background:var(--amber);color:#141414;
+    font-family:'JetBrains Mono';font-weight:700;font-size:9.5px;padding:1px 5px;
+    border-radius:3px;white-space:nowrap;letter-spacing:.03em}
+  .box.ped{border-color:var(--teal)} .box.ped .lbl{background:var(--teal)}
+  .cline{position:absolute;left:8%;right:8%;top:58%;height:2px;background:var(--teal);
+    box-shadow:0 0 10px var(--teal)}
+  .tally{position:absolute;right:12px;top:12px;font-family:'JetBrains Mono';
+    text-align:right;background:rgba(13,18,24,.7);border:1px solid var(--line);
+    border-radius:6px;padding:8px 11px;backdrop-filter:blur(3px)}
+  .tally .t{font-size:24px;font-weight:700;color:var(--amber)}
+  .tally .s{font-size:9.5px;color:var(--muted);letter-spacing:.14em}
+  .scan{position:absolute;left:0;right:0;height:60px;pointer-events:none;
+    background:linear-gradient(180deg,transparent,rgba(63,199,201,.10),transparent);
+    animation:scan 4.5s linear infinite}
+  @keyframes scan{0%{top:-60px}100%{top:300px}}
+
+  canvas{max-height:230px}
+
+  /* insight */
+  .insight{margin-top:12px}
+  .insight .bar{display:flex;justify-content:space-between;align-items:center;gap:12px;
+    flex-wrap:wrap}
+  .btn{font-family:'Space Grotesk';font-weight:600;font-size:13px;letter-spacing:.02em;
+    background:var(--amber);color:#141414;border:none;border-radius:7px;
+    padding:10px 16px;cursor:pointer;transition:transform .1s,filter .15s}
+  .btn:hover{filter:brightness(1.06)} .btn:active{transform:translateY(1px)}
+  .btn:disabled{opacity:.5;cursor:default}
+  .ins-body{margin-top:14px;border-left:2px solid var(--amber);padding:2px 0 2px 16px;
+    min-height:20px;font-size:15px;color:#DCE4EA}
+  .ins-body .rec{margin-top:10px;color:var(--amber);font-weight:500}
+  .ph{color:var(--muted);font-style:italic;font-size:13px}
+  .footnote{color:var(--muted);font-size:11px;margin-top:22px;text-align:center;
+    font-family:'JetBrains Mono';letter-spacing:.03em}
+  @media (max-width:820px){.readouts{grid-template-columns:repeat(2,1fr)}.row{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:reduce){.scan,.dot{animation:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="mark"></div>
+      <div>
+        <h1>SITELINE</h1>
+        <div class="sub">Aerial Site Intelligence</div>
+      </div>
+    </div>
+    <div class="site">
+      <div class="name">The Well — Toronto</div>
+      <div class="meta">CAPTURE 2026-07-12 · 17:04–17:14</div>
+      <div class="chip"><span class="dot"></span>LIVE DETECTION</div>
+    </div>
+  </header>
+
+  <div class="readouts">
+    <div class="cell amber">
+      <div class="k">Vehicles / hr · peak</div>
+      <div class="v">353</div>
+      <div class="d">▲ 2.4× off-peak</div>
+    </div>
+    <div class="cell amber">
+      <div class="k">Pedestrians / hr · peak</div>
+      <div class="v">1,180</div>
+      <div class="d">▲ 3.2× mid-morning</div>
+    </div>
+    <div class="cell amber">
+      <div class="k">Lot occupancy · peak</div>
+      <div class="v">82<small>%</small></div>
+      <div class="d">near capacity 17:00</div>
+    </div>
+    <div class="cell">
+      <div class="k">Objects tracked</div>
+      <div class="v">4,602</div>
+      <div class="d" style="color:var(--muted)">avg conf 0.71</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <h3>Annotated footage — intersection hold</h3>
+      <div class="feed">
+        <div class="road"></div>
+        <div class="scan"></div>
+        <!-- stylised vehicles + detections -->
+        <div class="veh" style="left:14%;top:40%;width:70px;height:30px"></div>
+        <div class="box" style="left:13%;top:37%;width:78px;height:38px"><span class="lbl">CAR</span></div>
+
+        <div class="veh" style="left:52%;top:30%;width:96px;height:34px"></div>
+        <div class="box" style="left:51%;top:27%;width:104px;height:42px"><span class="lbl">HEAVY VEHICLE</span></div>
+
+        <div class="veh" style="left:74%;top:62%;width:66px;height:28px"></div>
+        <div class="box" style="left:73%;top:59%;width:74px;height:36px"><span class="lbl">CAR</span></div>
+
+        <div class="box ped" style="left:30%;top:70%;width:16px;height:30px"><span class="lbl">PEDESTRIAN</span></div>
+        <div class="box ped" style="left:40%;top:74%;width:16px;height:28px"><span class="lbl">PEDESTRIAN</span></div>
+
+        <div class="cline"></div>
+        <div class="tally">
+          <div class="t" id="liveTally">197</div>
+          <div class="s">CROSSINGS · WESTBOUND</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Peak vs off-peak</h3>
+      <canvas id="barChart"></canvas>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <h3>Parking occupancy across the day</h3>
+    <canvas id="lineChart" style="max-height:180px"></canvas>
+  </div>
+
+  <div class="card insight">
+    <div class="bar">
+      <h3 style="margin:0">Client insight</h3>
+      <button class="btn" id="genBtn" onclick="generateInsight()">Generate client insight →</button>
+    </div>
+    <div class="ins-body" id="insBody">
+      <span class="ph">Turns the numbers above into the plain-English "what this means" a client pays for. Written live by Claude.</span>
+    </div>
+  </div>
+
+  <div class="footnote">MOCKUP · ILLUSTRATIVE DATA · THIS IS THE PRESENTATION LAYER — THE ENGINE STAYS UNDER THE HOOD</div>
+</div>
+
+<script>
+  Chart.defaults.color = '#7E8C99';
+  Chart.defaults.font.family = 'JetBrains Mono';
+  Chart.defaults.borderColor = '#243039';
+
+  new Chart(document.getElementById('barChart'), {
+    type:'bar',
+    data:{ labels:['Vehicles/hr','Pedestrians/hr'],
+      datasets:[
+        {label:'Peak', data:[353,1180], backgroundColor:'#FFB020', borderRadius:4},
+        {label:'Off-peak', data:[147,369], backgroundColor:'#2f3d49', borderRadius:4}
+      ]},
+    options:{responsive:true,plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}},
+      scales:{y:{grid:{color:'#1c2731'}},x:{grid:{display:false}}}}
+  });
+
+  new Chart(document.getElementById('lineChart'), {
+    type:'line',
+    data:{ labels:['9a','10a','11a','12p','1p','2p','3p','4p','5p','6p','7p','8p'],
+      datasets:[{label:'Lot occupancy %',
+        data:[28,34,41,58,63,55,49,61,82,79,64,47],
+        borderColor:'#3FC7C9', backgroundColor:'rgba(63,199,201,.12)',
+        fill:true, tension:.35, pointRadius:2, borderWidth:2}]},
+    options:{responsive:true,plugins:{legend:{display:false}},
+      scales:{y:{grid:{color:'#1c2731'},ticks:{callback:v=>v+'%'},min:0,max:100},
+        x:{grid:{display:false}}}}
+  });
+
+  // ambient tally tick for the "live" feel
+  let tally=197;
+  setInterval(()=>{ if(Math.random()>.4){tally++;document.getElementById('liveTally').textContent=tally;} },2600);
+
+  async function generateInsight(){
+    const btn=document.getElementById('genBtn');
+    const body=document.getElementById('insBody');
+    btn.disabled=true; btn.textContent='Analysing…';
+    body.innerHTML='<span class="ph">Claude is reading the metrics…</span>';
+
+    const prompt=`You are a site-intelligence analyst writing for a commercial real-estate client about The Well, a mixed-use development in Toronto. Based on this captured data, write a 2-sentence executive insight, then one specific recommendation.
+Data: peak vehicles/hr 353 (2.4x off-peak); peak pedestrians/hr 1180 at ~5pm (3.2x mid-morning); parking lot occupancy peaks at 82% around 5pm; 4602 objects tracked, avg confidence 0.71.
+Return ONLY: a short paragraph (the insight), then on a new line starting with "Recommendation:" one concrete action. No preamble, no markdown.`;
+
+    try{
+      const res=await fetch("https://api.anthropic.com/v1/messages",{
+        method:"POST", headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,
+          messages:[{role:"user",content:prompt}]})
+      });
+      const data=await res.json();
+      let text=(data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n").trim();
+      text=text.replace(/```[a-z]*|```/g,"").trim();
+      if(!text) throw new Error("empty");
+      const idx=text.indexOf("Recommendation:");
+      let main=text, rec="";
+      if(idx>-1){ main=text.slice(0,idx).trim(); rec=text.slice(idx).trim(); }
+      body.innerHTML = main.replace(/\n/g,"<br>") + (rec?`<div class="rec">${rec}</div>`:"");
+    }catch(e){
+      body.innerHTML = `Peak-hour demand at The Well is sharply concentrated: foot traffic runs 3.2× its mid-morning baseline and the parking lot approaches capacity at 82% around 5pm, indicating the site draws a strong after-work crowd rather than steady all-day flow. This peak concentration is an asset for retail leasing but a pressure point for parking.<div class="rec">Recommendation: Position the 5–7pm window in retail leasing conversations, and evaluate dynamic or overflow parking before the lot tips past capacity. <span class="ph">(offline fallback — live text is written by Claude when connected)</span></div>`;
+    }
+    btn.disabled=false; btn.textContent='Regenerate →';
+  }
+</script>
