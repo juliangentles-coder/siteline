@@ -6,3 +6,4 @@ footage/
 output/
 __pycache__/
 .DS_Store
+!clips/*.mp4
