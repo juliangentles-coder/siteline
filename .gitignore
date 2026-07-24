@@ -7,3 +7,5 @@ output/
 __pycache__/
 .DS_Store
 !clips/*.mp4
+patch_*.py
+fix_*.py
