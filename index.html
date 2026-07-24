@@ -86,8 +86,16 @@
     padding:18px;margin-bottom:14px;display:grid;grid-template-columns:190px 1fr;gap:20px}
   .schem{align-self:start}
   .schem svg{width:100%;height:auto;display:block;border-radius:6px;background:#0E141A;border:1px solid var(--rule)}
+  .tw{position:relative;margin-bottom:7px;border-radius:6px;overflow:hidden;border:1px solid var(--rule)}
+  .tw.v{border-color:rgba(255,176,32,.45)} .tw.p{border-color:rgba(53,200,196,.45)}
+  .tw:hover{border-width:1px}
+  .tw.v:hover{border-color:var(--amber)} .tw.p:hover{border-color:var(--teal)}
+  .tl{position:absolute;left:6px;bottom:5px;font-family:'JetBrains Mono',monospace;
+    font-size:8px;letter-spacing:.14em;padding:2px 5px;border-radius:3px;
+    background:rgba(11,15,20,.78);pointer-events:none}
+  .tw.v .tl{color:var(--amber)} .tw.p .tl{color:var(--teal)}
   .schem video.thumb{width:100%;height:auto;display:block;border-radius:6px;background:#000;
-    border:1px solid var(--rule);cursor:pointer;aspect-ratio:16/9;object-fit:cover;
+    cursor:pointer;aspect-ratio:16/9;object-fit:cover;
     transition:border-color .15s}
   .schem video.thumb:hover{border-color:var(--amber)}
   .schem .cap{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--dim);
@@ -100,16 +108,20 @@
   .m .head{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;
     text-transform:uppercase;margin-bottom:9px}
   .m.v .head{color:var(--amber)} .m.p .head{color:var(--teal)}
-  .raw{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:23px;line-height:1.15}
+  .raw{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:19px;
+    line-height:1.15;color:#C6D2DB}
   .raw small{font-size:12px;font-weight:400;color:var(--dim);display:block;margin-top:3px;
     letter-spacing:.02em}
-  .est{margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#AFBCC7}
-  .est em{font-style:normal;color:var(--dim);font-size:10.5px;display:block;margin-top:2px}
+  .est{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:700;
+    line-height:1.15;letter-spacing:-.01em}
+  .est em{font-style:normal;color:var(--dim);font-size:10px;display:block;margin-top:4px;
+    font-weight:400;letter-spacing:.04em;text-transform:uppercase}
   .conf{margin-top:11px;display:flex;align-items:center;gap:8px;
     font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim)}
   .meter{flex:1;max-width:74px;height:4px;background:#1E2833;border-radius:2px;overflow:hidden}
   .meter i{display:block;height:100%;border-radius:2px}
   .m.v .meter i{background:var(--amber)} .m.p .meter i{background:var(--teal)}
+  .m.v .est{color:var(--amber)} .m.p .est{color:var(--teal)}
   .classes{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--dim);
     margin-top:9px;line-height:1.7}
 
@@ -305,7 +317,8 @@
   <!-- Fort York -->
   <article class="site">
     <div class="schem">
-      <video class="thumb" data-clip="spadinafortyork_vehicles" muted playsinline preload="metadata" src="clips/spadinafortyork_vehicles.mp4#t=3"></video>
+      <div class="tw v"><video class="thumb" data-clip="spadinafortyork_vehicles" data-site="Spadina &amp; Fort York" data-stream="Vehicle count" data-stat="157 vehicles · 2.7 min · conf 0.76" muted playsinline preload="metadata" src="clips/spadinafortyork_vehicles.mp4#t=3"></video><span class="tl">VEHICLES</span></div>
+      <div class="tw p"><video class="thumb" data-clip="spadinafortyork_people" data-site="Spadina &amp; Fort York" data-stream="People count" data-stat="57 people · 2.7 min · conf 0.55" muted playsinline preload="metadata" src="clips/spadinafortyork_people.mp4#t=3"></video><span class="tl">PEOPLE</span></div>
       <div class="cap">VEH 700,1700 → 3400,1700<br>PPL 600,1100 → 3400,1100</div>
     </div>
     <div>
@@ -320,12 +333,7 @@
           <div class="est">≈ 3,453 / hr<em>projected from the sample above</em></div>
           <div class="conf">0.76 <span class="meter"><i style="width:76%"></i></span> confidence</div>
           <div class="classes">147 car · 5 bus · 3 truck · 2 motorcycle</div>
-          <button class="proof" data-clip="spadinafortyork_vehicles"
-            data-site="Spadina &amp; Fort York" data-stream="Vehicle count"
-            data-stat="157 vehicles · 2.7 min · conf 0.76">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            FOOTAGE
-          </button>
+          
         </div>
         <div class="m p">
           <div class="head">People</div>
@@ -333,12 +341,7 @@
           <div class="est">≈ 1,254 / hr<em>projected from the sample above</em></div>
           <div class="conf">0.55 <span class="meter"><i style="width:55%"></i></span> confidence</div>
           <div class="classes">pedestrians crossing the north walk</div>
-          <button class="proof" data-clip="spadinafortyork_people"
-            data-site="Spadina &amp; Fort York" data-stream="People count"
-            data-stat="57 people · 2.7 min · conf 0.55">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            FOOTAGE
-          </button>
+          
         </div>
       </div>
       <div class="note">
@@ -351,7 +354,8 @@
   <!-- Blue Jays Way -->
   <article class="site">
     <div class="schem">
-      <video class="thumb" data-clip="spadinabluejay_vehicles" muted playsinline preload="metadata" src="clips/spadinabluejay_vehicles.mp4#t=3"></video>
+      <div class="tw v"><video class="thumb" data-clip="spadinabluejay_vehicles" data-site="Spadina &amp; Blue Jays Way" data-stream="Vehicle count" data-stat="57 vehicles · 1.8 min · conf 0.72" muted playsinline preload="metadata" src="clips/spadinabluejay_vehicles.mp4#t=3"></video><span class="tl">VEHICLES</span></div>
+      <div class="tw p"><video class="thumb" data-clip="spadinabluejay_people" data-site="Spadina &amp; Blue Jays Way" data-stream="People count" data-stat="46 people · 1.8 min · conf 0.56" muted playsinline preload="metadata" src="clips/spadinabluejay_people.mp4#t=3"></video><span class="tl">PEOPLE</span></div>
       <div class="cap">VEH 150,1150 → 2900,1450<br>PPL 1600,750 → 1900,950</div>
     </div>
     <div>
@@ -366,12 +370,7 @@
           <div class="est">≈ 1,922 / hr<em>projected from the sample above</em></div>
           <div class="conf">0.72 <span class="meter"><i style="width:72%"></i></span> confidence</div>
           <div class="classes">49 car · 4 truck · 3 bicycle · 1 bus</div>
-          <button class="proof" data-clip="spadinabluejay_vehicles"
-            data-site="Spadina &amp; Blue Jays Way" data-stream="Vehicle count"
-            data-stat="57 vehicles · 1.8 min · conf 0.72">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            FOOTAGE
-          </button>
+          
         </div>
         <div class="m p">
           <div class="head">People</div>
@@ -379,12 +378,7 @@
           <div class="est">≈ 1,551 / hr<em>projected from the sample above</em></div>
           <div class="conf">0.56 <span class="meter"><i style="width:56%"></i></span> confidence</div>
           <div class="classes">sidewalk and crossing traffic</div>
-          <button class="proof" data-clip="spadinabluejay_people"
-            data-site="Spadina &amp; Blue Jays Way" data-stream="People count"
-            data-stat="46 people · 1.8 min · conf 0.56">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            FOOTAGE
-          </button>
+          
         </div>
       </div>
       <div class="note">
@@ -397,7 +391,8 @@
   <!-- King & Portland -->
   <article class="site">
     <div class="schem">
-      <video class="thumb" data-clip="kingportland_people" muted playsinline preload="metadata" src="clips/kingportland_people.mp4#t=3"></video>
+      <div class="tw v"><video class="thumb" data-clip="kingportland_vehicles" data-site="King &amp; Portland" data-stream="Vehicle count" data-stat="24 vehicles · 3.2 min · conf 0.74" muted playsinline preload="metadata" src="clips/kingportland_vehicles.mp4#t=3"></video><span class="tl">VEHICLES</span></div>
+      <div class="tw p"><video class="thumb" data-clip="kingportland_people" data-site="King &amp; Portland" data-stream="People count" data-stat="119 people · 3.2 min · conf 0.54" muted playsinline preload="metadata" src="clips/kingportland_people.mp4#t=3"></video><span class="tl">PEOPLE</span></div>
       <div class="cap">VEH 1250,350 → 1900,350<br>PPL 2700,900 → 2700,1700</div>
     </div>
     <div>
@@ -412,12 +407,7 @@
           <div class="est">≈ 455 / hr<em>projected from the sample above</em></div>
           <div class="conf">0.74 <span class="meter"><i style="width:74%"></i></span> confidence</div>
           <div class="classes">24 car · line across Portland's approach</div>
-          <button class="proof" data-clip="kingportland_vehicles"
-            data-site="King &amp; Portland" data-stream="Vehicle count"
-            data-stat="24 vehicles · 3.2 min · conf 0.74">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            FOOTAGE
-          </button>
+          
         </div>
         <div class="m p">
           <div class="head">People</div>
@@ -425,12 +415,7 @@
           <div class="est">≈ 2,254 / hr<em>projected from the sample above</em></div>
           <div class="conf">0.54 <span class="meter"><i style="width:54%"></i></span> confidence</div>
           <div class="classes">crossing beside the streetcar stop</div>
-          <button class="proof" data-clip="kingportland_people"
-            data-site="King &amp; Portland" data-stream="People count"
-            data-stat="119 people · 3.2 min · conf 0.54">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            FOOTAGE
-          </button>
+          
         </div>
       </div>
       <div class="note">
@@ -444,7 +429,8 @@
   <!-- Arcadia entrance -->
   <article class="site">
     <div class="schem">
-      <video class="thumb" data-clip="entrance1_people" muted playsinline preload="metadata" src="clips/entrance1_people.mp4#t=3"></video>
+      <div class="tw v"><video class="thumb" data-clip="entrance1_vehicles" data-site="The Well — Arcadia entrance" data-stream="Vehicle count" data-stat="26 vehicles · 2.9 min · conf 0.74" muted playsinline preload="metadata" src="clips/entrance1_vehicles.mp4#t=3"></video><span class="tl">VEHICLES</span></div>
+      <div class="tw p"><video class="thumb" data-clip="entrance1_people" data-site="The Well — Arcadia entrance" data-stream="People count" data-stat="86 people · 2.9 min · conf 0.48 — a floor" muted playsinline preload="metadata" src="clips/entrance1_people.mp4#t=3"></video><span class="tl">PEOPLE</span></div>
       <div class="cap">VEH 1900,100 → 2200,1000<br>PPL 1710,700 → 2200,100</div>
     </div>
     <div>
@@ -459,12 +445,7 @@
           <div class="est">≈ 538 / hr<em>projected from the sample above</em></div>
           <div class="conf">0.74 <span class="meter"><i style="width:74%"></i></span> confidence</div>
           <div class="classes">23 car · 2 motorcycle · 1 truck</div>
-          <button class="proof" data-clip="entrance1_vehicles"
-            data-site="The Well — Arcadia entrance" data-stream="Vehicle count"
-            data-stat="26 vehicles · 2.9 min · conf 0.74">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            FOOTAGE
-          </button>
+          
         </div>
         <div class="m p">
           <div class="head">People</div>
@@ -472,12 +453,7 @@
           <div class="est">≈ 1,779 / hr<em>projected from the sample above</em></div>
           <div class="conf">0.48 <span class="meter"><i style="width:48%"></i></span> confidence</div>
           <div class="classes">entering through the doorway</div>
-          <button class="proof" data-clip="entrance1_people"
-            data-site="The Well — Arcadia entrance" data-stream="People count"
-            data-stat="86 people · 2.9 min · conf 0.48 — a floor">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            FOOTAGE
-          </button>
+          
         </div>
       </div>
       <div class="note">
@@ -491,7 +467,8 @@
   <!-- Concord frontage -->
   <article class="site">
     <div class="schem">
-      <video class="thumb" data-clip="spadina1_vehicles" muted playsinline preload="metadata" src="clips/spadina1_vehicles.mp4#t=3"></video>
+      <div class="tw v"><video class="thumb" data-clip="spadina1_vehicles" data-site="Spadina — Concord frontage" data-stream="Vehicle count" data-stat="30 vehicles · 2.9 min · conf 0.65" muted playsinline preload="metadata" src="clips/spadina1_vehicles.mp4#t=3"></video><span class="tl">VEHICLES</span></div>
+      <div class="tw p"><video class="thumb" data-clip="spadina1_people" data-site="Spadina — Concord frontage" data-stream="People count" data-stat="21 people · 2.9 min · conf 0.63" muted playsinline preload="metadata" src="clips/spadina1_people.mp4#t=3"></video><span class="tl">PEOPLE</span></div>
       <div class="cap">VEH 100,1900 → 2400,1750<br>PPL 1500,1250 → 1500,1600</div>
     </div>
     <div>
@@ -506,12 +483,7 @@
           <div class="est">≈ 621 / hr<em>projected from the sample above</em></div>
           <div class="conf">0.65 <span class="meter"><i style="width:65%"></i></span> confidence</div>
           <div class="classes">28 car · 1 motorcycle · 1 bicycle</div>
-          <button class="proof" data-clip="spadina1_vehicles"
-            data-site="Spadina — Concord frontage" data-stream="Vehicle count"
-            data-stat="30 vehicles · 2.9 min · conf 0.65">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            FOOTAGE
-          </button>
+          
         </div>
         <div class="m p">
           <div class="head">People</div>
@@ -519,12 +491,7 @@
           <div class="est">≈ 434 / hr<em>projected from the sample above</em></div>
           <div class="conf">0.63 <span class="meter"><i style="width:63%"></i></span> confidence</div>
           <div class="classes">walking the retail frontage</div>
-          <button class="proof" data-clip="spadina1_people"
-            data-site="Spadina — Concord frontage" data-stream="People count"
-            data-stat="21 people · 2.9 min · conf 0.63">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            FOOTAGE
-          </button>
+          
         </div>
       </div>
       <div class="note">
@@ -538,7 +505,8 @@
   <!-- Front St -->
   <article class="site">
     <div class="schem">
-      <video class="thumb" data-clip="wellnoon_vehicles" muted playsinline preload="metadata" src="clips/wellnoon_vehicles.mp4#t=3"></video>
+      <div class="tw v"><video class="thumb" data-clip="wellnoon_vehicles" data-site="The Well — Front St frontage" data-stream="Vehicle count" data-stat="24 vehicles · 2.7 min · conf 0.77" muted playsinline preload="metadata" src="clips/wellnoon_vehicles.mp4#t=3"></video><span class="tl">VEHICLES</span></div>
+      <div class="tw p"><video class="thumb" data-clip="wellnoon_people" data-site="The Well — Front St frontage" data-stream="People count" data-stat="18 people · 2.7 min · conf 0.52" muted playsinline preload="metadata" src="clips/wellnoon_people.mp4#t=3"></video><span class="tl">PEOPLE</span></div>
       <div class="cap">VEH 1600,1300 → 2100,1500<br>PPL 750,550 → 1050,850</div>
     </div>
     <div>
@@ -553,12 +521,7 @@
           <div class="est">≈ 536 / hr<em>projected from the sample above</em></div>
           <div class="conf">0.77 <span class="meter"><i style="width:77%"></i></span> confidence</div>
           <div class="classes">22 car · 2 truck</div>
-          <button class="proof" data-clip="wellnoon_vehicles"
-            data-site="The Well — Front St frontage" data-stream="Vehicle count"
-            data-stat="24 vehicles · 2.7 min · conf 0.77">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            FOOTAGE
-          </button>
+          
         </div>
         <div class="m p">
           <div class="head">People</div>
@@ -566,12 +529,7 @@
           <div class="est">≈ 402 / hr<em>projected from the sample above</em></div>
           <div class="conf">0.52 <span class="meter"><i style="width:52%"></i></span> confidence</div>
           <div class="classes">plaza walkway between storefront and road</div>
-          <button class="proof" data-clip="wellnoon_people"
-            data-site="The Well — Front St frontage" data-stream="People count"
-            data-stat="18 people · 2.7 min · conf 0.52">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            FOOTAGE
-          </button>
+          
         </div>
       </div>
       <div class="note">
@@ -707,17 +665,8 @@
     err.style.display = 'block';
   });
 
-  document.querySelectorAll('.proof').forEach(function(b){
-    b.addEventListener('click', function(){ open(b); });
-  });
-  document.querySelectorAll('video.thumb').forEach(function(v){
-    v.addEventListener('click', function(){
-      var card = v.closest('.site');
-      var btn = card ? card.querySelector('.proof') : null;
-      if (btn) btn.click();
-    });
-  });
-  document.getElementById('lbClose').addEventListener('click', close);
+
+document.getElementById('lbClose').addEventListener('click', close);
   lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && lb.classList.contains('on')) close();
