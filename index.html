@@ -85,8 +85,11 @@
   .site{background:var(--panel);border:1px solid var(--rule);border-radius:10px;
     padding:18px;margin-bottom:14px;display:grid;grid-template-columns:190px 1fr;gap:20px}
   .schem{align-self:start}
-  .schem svg{width:100%;height:auto;display:block;border-radius:6px;background:#0E141A;
-    border:1px solid var(--rule)}
+  .schem svg{width:100%;height:auto;display:block;border-radius:6px;background:#0E141A;border:1px solid var(--rule)}
+  .schem video.thumb{width:100%;height:auto;display:block;border-radius:6px;background:#000;
+    border:1px solid var(--rule);cursor:pointer;aspect-ratio:16/9;object-fit:cover;
+    transition:border-color .15s}
+  .schem video.thumb:hover{border-color:var(--amber)}
   .schem .cap{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--dim);
     margin-top:7px;line-height:1.6;letter-spacing:.02em}
   .sitehead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
@@ -302,19 +305,13 @@
   <!-- Fort York -->
   <article class="site">
     <div class="schem">
-      <svg viewBox="0 0 3840 2160" role="img" aria-label="Counting lines on frame">
-        <g stroke="#26333F" stroke-width="4">
-          <path d="M0 720H3840M0 1440H3840M1280 0V2160M2560 0V2160"/>
-        </g>
-        <line x1="700" y1="1700" x2="3400" y2="1700" stroke="#FFB020" stroke-width="26"/>
-        <line x1="600" y1="1100" x2="3400" y2="1100" stroke="#35C8C4" stroke-width="26"/>
-      </svg>
+      <video class="thumb" data-clip="spadinafortyork_vehicles" muted playsinline preload="metadata" src="clips/spadinafortyork_vehicles.mp4#t=3"></video>
       <div class="cap">VEH 700,1700 → 3400,1700<br>PPL 600,1100 → 3400,1100</div>
     </div>
     <div>
       <div class="sitehead">
         <h3>Spadina &amp; Fort York</h3>
-        <span class="when">JUL 16 · EVENING · 2.7 MIN</span>
+        <span class="when">JUL 16 · 6:21 PM EDT · 2.7 MIN</span>
       </div>
       <div class="metrics">
         <div class="m v">
@@ -354,19 +351,13 @@
   <!-- Blue Jays Way -->
   <article class="site">
     <div class="schem">
-      <svg viewBox="0 0 3840 2160" role="img" aria-label="Counting lines on frame">
-        <g stroke="#26333F" stroke-width="4">
-          <path d="M0 720H3840M0 1440H3840M1280 0V2160M2560 0V2160"/>
-        </g>
-        <line x1="150" y1="1150" x2="2900" y2="1450" stroke="#FFB020" stroke-width="26"/>
-        <line x1="1600" y1="750" x2="1900" y2="950" stroke="#35C8C4" stroke-width="26"/>
-      </svg>
+      <video class="thumb" data-clip="spadinabluejay_vehicles" muted playsinline preload="metadata" src="clips/spadinabluejay_vehicles.mp4#t=3"></video>
       <div class="cap">VEH 150,1150 → 2900,1450<br>PPL 1600,750 → 1900,950</div>
     </div>
     <div>
       <div class="sitehead">
         <h3>Spadina &amp; Blue Jays Way</h3>
-        <span class="when">JUL 16 · EVENING · 1.8 MIN</span>
+        <span class="when">JUL 16 · 6:25 PM EDT · 1.8 MIN</span>
       </div>
       <div class="metrics">
         <div class="m v">
@@ -406,19 +397,13 @@
   <!-- King & Portland -->
   <article class="site">
     <div class="schem">
-      <svg viewBox="0 0 3840 2160" role="img" aria-label="Counting lines on frame">
-        <g stroke="#26333F" stroke-width="4">
-          <path d="M0 720H3840M0 1440H3840M1280 0V2160M2560 0V2160"/>
-        </g>
-        <line x1="1250" y1="350" x2="1900" y2="350" stroke="#FFB020" stroke-width="26"/>
-        <line x1="2700" y1="900" x2="2700" y2="1700" stroke="#35C8C4" stroke-width="26"/>
-      </svg>
+      <video class="thumb" data-clip="kingportland_people" muted playsinline preload="metadata" src="clips/kingportland_people.mp4#t=3"></video>
       <div class="cap">VEH 1250,350 → 1900,350<br>PPL 2700,900 → 2700,1700</div>
     </div>
     <div>
       <div class="sitehead">
         <h3>King &amp; Portland</h3>
-        <span class="when">JUL 16 · 17:34 · 3.2 MIN</span>
+        <span class="when">JUL 16 · 5:34 PM EDT · 3.2 MIN</span>
       </div>
       <div class="metrics">
         <div class="m v">
@@ -459,19 +444,13 @@
   <!-- Arcadia entrance -->
   <article class="site">
     <div class="schem">
-      <svg viewBox="0 0 3840 2160" role="img" aria-label="Counting lines on frame">
-        <g stroke="#26333F" stroke-width="4">
-          <path d="M0 720H3840M0 1440H3840M1280 0V2160M2560 0V2160"/>
-        </g>
-        <line x1="1900" y1="100" x2="2200" y2="1000" stroke="#FFB020" stroke-width="26"/>
-        <line x1="1710" y1="700" x2="2200" y2="100" stroke="#35C8C4" stroke-width="26"/>
-      </svg>
+      <video class="thumb" data-clip="entrance1_people" muted playsinline preload="metadata" src="clips/entrance1_people.mp4#t=3"></video>
       <div class="cap">VEH 1900,100 → 2200,1000<br>PPL 1710,700 → 2200,100</div>
     </div>
     <div>
       <div class="sitehead">
         <h3>The Well — Arcadia entrance</h3>
-        <span class="when">JUL 13 · 2.9 MIN</span>
+        <span class="when">JUL 13 · 3:06 PM EDT · 2.9 MIN</span>
       </div>
       <div class="metrics">
         <div class="m v">
@@ -512,19 +491,13 @@
   <!-- Concord frontage -->
   <article class="site">
     <div class="schem">
-      <svg viewBox="0 0 3840 2160" role="img" aria-label="Counting lines on frame">
-        <g stroke="#26333F" stroke-width="4">
-          <path d="M0 720H3840M0 1440H3840M1280 0V2160M2560 0V2160"/>
-        </g>
-        <line x1="100" y1="1900" x2="2400" y2="1750" stroke="#FFB020" stroke-width="26"/>
-        <line x1="1500" y1="1250" x2="1500" y2="1600" stroke="#35C8C4" stroke-width="26"/>
-      </svg>
+      <video class="thumb" data-clip="spadina1_vehicles" muted playsinline preload="metadata" src="clips/spadina1_vehicles.mp4#t=3"></video>
       <div class="cap">VEH 100,1900 → 2400,1750<br>PPL 1500,1250 → 1500,1600</div>
     </div>
     <div>
       <div class="sitehead">
         <h3>Spadina — Concord frontage</h3>
-        <span class="when">JUL 16 · 18:09 · 2.9 MIN</span>
+        <span class="when">JUL 16 · 6:09 PM EDT · 2.9 MIN</span>
       </div>
       <div class="metrics">
         <div class="m v">
@@ -565,19 +538,13 @@
   <!-- Front St -->
   <article class="site">
     <div class="schem">
-      <svg viewBox="0 0 3840 2160" role="img" aria-label="Counting lines on frame">
-        <g stroke="#26333F" stroke-width="4">
-          <path d="M0 720H3840M0 1440H3840M1280 0V2160M2560 0V2160"/>
-        </g>
-        <line x1="1600" y1="1300" x2="2100" y2="1500" stroke="#FFB020" stroke-width="26"/>
-        <line x1="750" y1="550" x2="1050" y2="850" stroke="#35C8C4" stroke-width="26"/>
-      </svg>
+      <video class="thumb" data-clip="wellnoon_vehicles" muted playsinline preload="metadata" src="clips/wellnoon_vehicles.mp4#t=3"></video>
       <div class="cap">VEH 1600,1300 → 2100,1500<br>PPL 750,550 → 1050,850</div>
     </div>
     <div>
       <div class="sitehead">
         <h3>The Well — Front St frontage</h3>
-        <span class="when">JUL 14 · MIDDAY · 2.7 MIN</span>
+        <span class="when">JUL 14 · 12:15 PM EDT · 2.7 MIN</span>
       </div>
       <div class="metrics">
         <div class="m v">
@@ -742,6 +709,13 @@
 
   document.querySelectorAll('.proof').forEach(function(b){
     b.addEventListener('click', function(){ open(b); });
+  });
+  document.querySelectorAll('video.thumb').forEach(function(v){
+    v.addEventListener('click', function(){
+      var card = v.closest('.site');
+      var btn = card ? card.querySelector('.proof') : null;
+      if (btn) btn.click();
+    });
   });
   document.getElementById('lbClose').addEventListener('click', close);
   lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
