@@ -671,6 +671,19 @@ document.getElementById('lbClose').addEventListener('click', close);
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape' && lb.classList.contains('on')) close();
   });
+
+  // --- ensure footage thumbnails open the lightbox ---
+  document.querySelectorAll('video.thumb').forEach(function(v){
+    v.style.cursor = 'pointer';
+    v.addEventListener('click', function(e){
+      e.preventDefault();
+      if (v.dataset.clip) { open(v); return; }
+      var card = v.closest('.site');
+      var btn = card ? card.querySelector('.proof') : null;
+      if (btn) btn.click();
+    });
+  });
+
 })();
 </script>
 </body>
