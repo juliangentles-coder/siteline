@@ -1,0 +1,244 @@
+/* ===========================================================
+   SITELINE — shared stylesheet for the multi-page site
+   One file, linked from every page, so edits happen once.
+   =========================================================== */
+:root{
+  --void:#0B0F14;
+  --panel:#131A22;
+  --panel2:#19222C;
+  --rule:#26333F;
+  --ink:#E8EEF2;
+  --dim:#7A8894;
+  --amber:#FFB020;   /* vehicles */
+  --teal:#35C8C4;    /* people */
+  --linered:#FF4D4D; /* the counting line */
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--void);color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+body.locked{overflow:hidden}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 88px}
+.mono{font-family:'JetBrains Mono',monospace}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+/* ---------- top nav (shared across every page) ---------- */
+.topnav{border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:40;
+  background:rgba(11,15,20,.92);backdrop-filter:blur(8px)}
+.topnav-inner{max-width:1080px;margin:0 auto;padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.topbrand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink)}
+.mark{width:30px;height:30px;flex:none;border:1.5px solid var(--amber);border-radius:7px;
+  display:grid;place-items:center;position:relative;overflow:hidden}
+.mark:before{content:"";width:9px;height:9px;border:1.5px solid var(--amber);border-radius:50%}
+.mark:after{content:"";position:absolute;width:21px;height:1.5px;background:var(--linered);
+  transform:rotate(-34deg)}
+.topbrand span{font-family:'Space Grotesk',sans-serif;font-size:16.5px;font-weight:700;
+  letter-spacing:.16em}
+.toplinks{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.toplinks a{text-decoration:none;color:var(--dim);font-size:13.5px;font-weight:500;
+  letter-spacing:.01em;padding:6px 0;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+.toplinks a:hover{color:var(--ink)}
+.toplinks a.active{color:var(--ink);border-bottom-color:var(--amber)}
+.topcta{background:var(--amber);color:#141414;text-decoration:none;font-weight:600;
+  font-size:13px;padding:9px 16px;border-radius:7px;white-space:nowrap;flex:none;
+  font-family:'Space Grotesk',sans-serif;transition:filter .15s}
+.topcta:hover{filter:brightness(1.07)}
+@media (max-width:800px){
+  .toplinks{order:3;width:100%;gap:16px;padding-top:4px;justify-content:flex-start}
+}
+
+/* ---------- shared footer ---------- */
+.sitefoot{margin-top:34px;padding:22px 24px;border-top:1px solid var(--rule);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--dim);letter-spacing:.05em}
+.sitefoot a{color:var(--dim);text-decoration:underline}
+
+/* ---------- page hero (sub-pages: Pricing, Sample Report, Method, Contact) ---------- */
+.pagehero{padding:48px 0 20px;border-bottom:1px solid var(--rule);margin-bottom:44px}
+.pagehero .kicker{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:12px}
+.pagehero h1{font-size:32px;font-weight:700;letter-spacing:-.01em;max-width:20ch}
+.pagehero p{font-size:15.5px;color:#C6D2DB;max-width:62ch;margin-top:14px}
+
+/* ---------- home hero ---------- */
+.hero{padding:56px 0 8px}
+.hero h1{font-size:38px;line-height:1.2;font-weight:700;max-width:16ch;letter-spacing:-.01em}
+.hero .lede{margin:20px 0 28px;font-size:16.5px;max-width:60ch;color:#C6D2DB}
+.hero .lede strong{color:var(--ink);font-weight:500}
+.herobtns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.btn-amber{background:var(--amber);color:#141414;text-decoration:none;font-weight:600;
+  font-size:14px;padding:12px 20px;border-radius:8px;font-family:'Space Grotesk',sans-serif}
+.btn-ghost{background:transparent;color:var(--ink);text-decoration:none;font-weight:500;
+  font-size:14px;padding:12px 20px;border-radius:8px;border:1px solid var(--rule);
+  font-family:'Space Grotesk',sans-serif}
+
+/* ---------- totals ---------- */
+.totals{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin:32px 0 56px}
+.tot{background:var(--panel);padding:15px 16px}
+.tot .n{font-family:'JetBrains Mono',monospace;font-size:25px;font-weight:700;line-height:1}
+.tot .n u{text-decoration:none;font-size:13px;color:var(--dim);font-weight:400}
+.tot .l{color:var(--dim);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  font-family:'JetBrains Mono',monospace;margin-top:8px}
+
+/* ---------- section head ---------- */
+.shead{display:flex;align-items:baseline;gap:12px;margin:0 0 6px;flex-wrap:wrap}
+.shead h2{font-size:15px;letter-spacing:.11em;text-transform:uppercase;font-weight:500}
+.shead .hint{color:var(--dim);font-size:12.5px}
+.sub{color:var(--dim);font-size:13.5px;margin:0 0 20px;max-width:64ch}
+
+/* ---------- three-up feature/use-case grid (reused on several pages) ---------- */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.card3{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:18px 20px}
+.card3 .k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--amber);margin-bottom:9px}
+.card3 .k.teal{color:var(--teal)}
+.card3 p{font-size:13.5px;color:#C6D2DB;line-height:1.65;margin:0}
+@media (max-width:760px){.grid3{grid-template-columns:1fr}}
+
+/* ---------- profile comparison ---------- */
+.profile{background:var(--panel);border:1px solid var(--rule);border-radius:10px;
+  padding:20px 18px;margin-bottom:44px}
+.key{display:flex;gap:18px;justify-content:flex-end;margin-bottom:16px;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:var(--dim)}
+.key i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px}
+.prow{margin-bottom:15px}
+.prow:last-child{margin-bottom:0}
+.pname{font-size:13px;margin-bottom:6px;display:flex;justify-content:space-between;gap:10px}
+.pname span:last-child{color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:10.5px}
+.bars{display:grid;gap:3px}
+.bar{height:9px;border-radius:2px;position:relative;background:#1E2833}
+.bar i{position:absolute;inset:0 auto 0 0;border-radius:2px;display:block}
+.bar b{position:absolute;left:calc(var(--w) + 8px);top:-4px;font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:400;color:var(--dim);white-space:nowrap}
+
+/* ---------- site cards ---------- */
+.site{background:var(--panel);border:1px solid var(--rule);border-radius:10px;
+  padding:18px;margin-bottom:14px;display:grid;grid-template-columns:190px 1fr;gap:20px}
+.schem{align-self:start}
+.schem svg{width:100%;height:auto;display:block;border-radius:6px;background:#0E141A;
+  border:1px solid var(--rule)}
+.schem .cap{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--dim);
+  margin-top:7px;line-height:1.6;letter-spacing:.02em}
+.sitehead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+  flex-wrap:wrap;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+.sitehead h3{font-size:16.5px;font-weight:500}
+.when{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.05em}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.m .head{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;margin-bottom:9px}
+.m.v .head{color:var(--amber)} .m.p .head{color:var(--teal)}
+.raw{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:23px;line-height:1.15}
+.raw small{font-size:12px;font-weight:400;color:var(--dim);display:block;margin-top:3px;
+  letter-spacing:.02em}
+.est{margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#AFBCC7}
+.est em{font-style:normal;color:var(--dim);font-size:10.5px;display:block;margin-top:2px}
+.conf{margin-top:11px;display:flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim)}
+.meter{flex:1;max-width:74px;height:4px;background:#1E2833;border-radius:2px;overflow:hidden}
+.meter i{display:block;height:100%;border-radius:2px}
+.m.v .meter i{background:var(--amber)} .m.p .meter i{background:var(--teal)}
+.classes{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--dim);
+  margin-top:9px;line-height:1.7}
+
+/* ---------- the proof button ---------- */
+.proof{margin-top:12px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+  background:transparent;border:1px solid var(--rule);border-radius:6px;
+  padding:7px 11px 7px 8px;color:var(--dim);
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.13em;
+  transition:border-color .15s, color .15s, background .15s}
+.proof svg{width:13px;height:13px;flex:none;transition:transform .15s}
+.m.v .proof:hover{border-color:var(--amber);color:var(--amber);background:rgba(255,176,32,.07)}
+.m.p .proof:hover{border-color:var(--teal);color:var(--teal);background:rgba(53,200,196,.07)}
+.proof:hover svg{transform:scale(1.15)}
+
+.note{grid-column:1/-1;border-top:1px solid var(--rule);margin-top:4px;padding-top:12px;
+  font-size:12.5px;color:#9FB0BC}
+.note b{color:var(--ink);font-weight:500}
+
+/* ---------- method / limits / privacy ---------- */
+.method{background:var(--panel2);border:1px solid var(--rule);border-radius:10px;
+  padding:22px 20px;margin-top:40px}
+.method h2{font-size:14px;letter-spacing:.11em;text-transform:uppercase;margin-bottom:14px;
+  font-weight:500}
+.method ul{margin:0;padding-left:18px;font-size:13.5px;color:#B8C5D0}
+.method li{margin-bottom:9px}
+.method li:last-child{margin-bottom:0}
+.method b{color:var(--ink);font-weight:500}
+.limits{border-left:2px solid var(--linered);padding-left:14px;margin-top:18px}
+.limits h3{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--linered);
+  margin-bottom:9px;font-weight:500;font-family:'JetBrains Mono',monospace}
+
+/* ---------- pricing ---------- */
+.pricegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.pricecard{background:var(--panel);border:1px solid var(--rule);border-radius:12px;
+  padding:22px 20px;position:relative}
+.pricecard.hi{border-color:var(--teal)}
+.pricecard .badge{position:absolute;top:-10px;right:16px;background:var(--teal);color:#06201F;
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;padding:3px 9px;
+  border-radius:4px;font-weight:700}
+.pricecard .k{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--amber)}
+.pricecard.hi .k{color:var(--teal)}
+.pricecard .price{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:26px;
+  margin:10px 0 3px}
+.pricecard .scope{color:var(--dim);font-size:12.5px;margin-bottom:14px}
+.pricecard .desc{font-size:13.5px;color:#C6D2DB;line-height:1.7}
+@media (max-width:800px){.pricegrid{grid-template-columns:1fr}}
+
+/* ---------- contact ---------- */
+.contactcard{background:var(--panel2);border:1px solid var(--rule);border-radius:10px;
+  padding:26px 24px;margin-bottom:24px}
+.contactcard h3{font-size:19px;font-weight:500;margin-bottom:8px}
+.contactcard p{color:var(--dim);font-size:13.5px;margin:0 0 18px}
+.field{margin-bottom:14px}
+.field label{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.field input,.field textarea{width:100%;background:var(--panel);border:1px solid var(--rule);
+  border-radius:7px;padding:10px 12px;color:var(--ink);font-family:'Inter',sans-serif;
+  font-size:13.5px}
+.field textarea{resize:vertical;min-height:90px}
+
+/* ---------- lightbox (footage proof) ---------- */
+.lb{position:fixed;inset:0;z-index:50;display:none;
+  background:rgba(5,8,11,.9);backdrop-filter:blur(6px);
+  padding:24px;overflow-y:auto}
+.lb.on{display:flex;align-items:center;justify-content:center}
+.lbbox{width:100%;max-width:880px;background:var(--panel);border:1px solid var(--rule);
+  border-radius:12px;overflow:hidden;animation:pop .18s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.99)}to{opacity:1;transform:none}}
+.lbtop{display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:13px 15px;border-bottom:1px solid var(--rule)}
+.lbtitle{font-family:'Space Grotesk',sans-serif;font-size:14.5px;font-weight:500}
+.lbtitle span{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--dim);letter-spacing:.11em;margin-top:3px;text-transform:uppercase}
+.lbx{background:transparent;border:1px solid var(--rule);border-radius:6px;
+  color:var(--dim);cursor:pointer;width:30px;height:30px;flex:none;font-size:15px;line-height:1;
+  transition:border-color .15s,color .15s}
+.lbx:hover{border-color:var(--linered);color:var(--linered)}
+.lb video{display:block;width:100%;background:#000;max-height:66vh}
+.lbfoot{padding:12px 15px;display:flex;justify-content:space-between;align-items:center;
+  gap:14px;flex-wrap:wrap;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--dim);letter-spacing:.05em}
+.lbfoot b{color:var(--ink);font-weight:700}
+.lberr{padding:34px 18px;text-align:center;color:var(--dim);font-size:13px;display:none}
+.lberr code{color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:11.5px}
+
+@media (max-width:760px){
+  .totals{grid-template-columns:1fr 1fr}
+  .site{grid-template-columns:1fr}
+  .schem{max-width:220px}
+  .metrics{grid-template-columns:1fr;gap:20px}
+  .lb{padding:12px}
+  .hero h1{font-size:28px}
+}
+@media (prefers-reduced-motion:reduce){
+  .lbbox{animation:none}
+  .proof,.proof svg{transition:none}
+}

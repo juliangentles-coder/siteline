@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Data — SITELINE</title>
+<meta name="description" content="Foot and vehicle traffic measured from aerial footage at six Toronto locations. Every number shows the window it came from, and the footage it came from.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="topbrand" href="index.html"><div class="mark" aria-hidden="true"></div><span>SITELINE</span></a>
+    <div class="toplinks">
+      <a href="index.html">Home</a>
+      <a href="data.html" class="active">The Data</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sample-report.html">Sample Report</a>
+      <a href="method.html">Method &amp; Privacy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a class="topcta" href="mailto:sitelineto@gmail.com?subject=SITELINE%20traffic%20profile%20request">Request a report →</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="pagehero">
+    <div class="kicker">6 sites · King West / Fort York · Captured Jul 13–17, 2026</div>
+    <h1>Measured street traffic, Toronto</h1>
+    <p>Every count below came from aerial video of a real Toronto street, run through object
+      detection and tracked frame to frame. <strong style="color:var(--ink)">Each number shows the
+      window it was measured in — and the footage it was measured from.</strong> Where a rate is
+      projected to an hour, it says so, because a three-minute sample is a three-minute sample.</p>
+  </div>
+
+  <div class="totals">
+    <div class="tot"><div class="n">6</div><div class="l">Sites measured</div></div>
+    <div class="tot"><div class="n">16.2<u> min</u></div><div class="l">Footage analysed</div></div>
+    <div class="tot"><div class="n" style="color:var(--amber)">318</div><div class="l">Vehicles counted</div></div>
+    <div class="tot"><div class="n" style="color:var(--teal)">347</div><div class="l">People counted</div></div>
+  </div>
+
+  <!-- ============ PROFILE ============ -->
+  <div class="shead">
+    <h2>Traffic profile</h2>
+    <span class="hint">the thing a listing can't tell you</span>
+  </div>
+  <p class="sub">
+    Two corners a few hundred metres apart behave nothing alike. King &amp; Portland moves people.
+    Spadina &amp; Fort York moves cars. Bars are projected hourly rates, scaled against the busiest
+    site measured.
+  </p>
+
+  <div class="profile">
+    <div class="key">
+      <span><i style="background:var(--amber)"></i>VEHICLES/HR</span>
+      <span><i style="background:var(--teal)"></i>PEOPLE/HR</span>
+    </div>
+
+    <div class="prow">
+      <div class="pname"><span>Spadina &amp; Fort York</span><span>VEHICLE-DOMINANT</span></div>
+      <div class="bars">
+        <div class="bar" style="--w:100%"><i style="width:100%;background:var(--amber)"></i><b>3,453</b></div>
+        <div class="bar" style="--w:36.3%"><i style="width:36.3%;background:var(--teal)"></i><b>1,254</b></div>
+      </div>
+    </div>
+    <div class="prow">
+      <div class="pname"><span>Spadina &amp; Blue Jays Way</span><span>MIXED</span></div>
+      <div class="bars">
+        <div class="bar" style="--w:55.7%"><i style="width:55.7%;background:var(--amber)"></i><b>1,922</b></div>
+        <div class="bar" style="--w:44.9%"><i style="width:44.9%;background:var(--teal)"></i><b>1,551</b></div>
+      </div>
+    </div>
+    <div class="prow">
+      <div class="pname"><span>King &amp; Portland</span><span>PEDESTRIAN-DOMINANT</span></div>
+      <div class="bars">
+        <div class="bar" style="--w:13.2%"><i style="width:13.2%;background:var(--amber)"></i><b>455</b></div>
+        <div class="bar" style="--w:65.3%"><i style="width:65.3%;background:var(--teal)"></i><b>2,254</b></div>
+      </div>
+    </div>
+    <div class="prow">
+      <div class="pname"><span>The Well — Arcadia entrance</span><span>PEDESTRIAN-DOMINANT</span></div>
+      <div class="bars">
+        <div class="bar" style="--w:15.6%"><i style="width:15.6%;background:var(--amber)"></i><b>538</b></div>
+        <div class="bar" style="--w:51.5%"><i style="width:51.5%;background:var(--teal)"></i><b>1,779</b></div>
+      </div>
+    </div>
+    <div class="prow">
+      <div class="pname"><span>Spadina — Concord frontage</span><span>MIXED / MODERATE</span></div>
+      <div class="bars">
+        <div class="bar" style="--w:18.0%"><i style="width:18.0%;background:var(--amber)"></i><b>621</b></div>
+        <div class="bar" style="--w:12.6%"><i style="width:12.6%;background:var(--teal)"></i><b>434</b></div>
+      </div>
+    </div>
+    <div class="prow">
+      <div class="pname"><span>The Well — Front St frontage</span><span>MIXED / MODERATE</span></div>
+      <div class="bars">
+        <div class="bar" style="--w:15.5%"><i style="width:15.5%;background:var(--amber)"></i><b>536</b></div>
+        <div class="bar" style="--w:11.6%"><i style="width:11.6%;background:var(--teal)"></i><b>402</b></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SITES ============ -->
+  <div class="shead">
+    <h2>The sites</h2>
+    <span class="hint">raw count first, projection second, footage on demand</span>
+  </div>
+  <p class="sub">
+    The diagram on each card is the actual counting line used, drawn at those pixel coordinates on
+    a 3840&times;2160 frame. Hit <em style="font-style:normal;color:#AFBCC7">footage</em> to watch
+    the count happen against it.
+  </p>
+
+  <!-- Fort York -->
+  <article class="site">
+    <div class="schem">
+      <svg viewBox="0 0 3840 2160" role="img" aria-label="Counting lines on frame">
+        <g stroke="#26333F" stroke-width="4"><path d="M0 720H3840M0 1440H3840M1280 0V2160M2560 0V2160"/></g>
+        <line x1="700" y1="1700" x2="3400" y2="1700" stroke="#FFB020" stroke-width="26"/>
+        <line x1="600" y1="1100" x2="3400" y2="1100" stroke="#35C8C4" stroke-width="26"/>
+      </svg>
+      <div class="cap">VEH 700,1700 → 3400,1700<br>PPL 600,1100 → 3400,1100</div>
+    </div>
+    <div>
+      <div class="sitehead"><h3>Spadina &amp; Fort York</h3><span class="when">JUL 16 · EVENING · 2.7 MIN</span></div>
+      <div class="metrics">
+        <div class="m v">
+          <div class="head">Vehicles</div>
+          <div class="raw">157<small>in a 2.7 min window</small></div>
+          <div class="est">≈ 3,453 / hr<em>projected from the sample above</em></div>
+          <div class="conf">0.76 <span class="meter"><i style="width:76%"></i></span> confidence</div>
+          <div class="classes">147 car · 5 bus · 3 truck · 2 motorcycle</div>
+          <button class="proof" data-clip="spadinafortyork_vehicles" data-site="Spadina &amp; Fort York" data-stream="Vehicle count" data-stat="157 vehicles · 2.7 min · conf 0.76">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>FOOTAGE</button>
+        </div>
+        <div class="m p">
+          <div class="head">People</div>
+          <div class="raw">57<small>in a 2.7 min window</small></div>
+          <div class="est">≈ 1,254 / hr<em>projected from the sample above</em></div>
+          <div class="conf">0.55 <span class="meter"><i style="width:55%"></i></span> confidence</div>
+          <div class="classes">pedestrians crossing the north walk</div>
+          <button class="proof" data-clip="spadinafortyork_people" data-site="Spadina &amp; Fort York" data-stream="People count" data-stat="57 people · 2.7 min · conf 0.55">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>FOOTAGE</button>
+        </div>
+      </div>
+      <div class="note"><b>Busiest road measured.</b> A five-lane arterial with transit in frame. The vehicle line spans the full carriageway, so nothing passes around either end.</div>
+    </div>
+  </article>
+
+  <!-- Blue Jays Way -->
+  <article class="site">
+    <div class="schem">
+      <svg viewBox="0 0 3840 2160" role="img" aria-label="Counting lines on frame">
+        <g stroke="#26333F" stroke-width="4"><path d="M0 720H3840M0 1440H3840M1280 0V2160M2560 0V2160"/></g>
+        <line x1="150" y1="1150" x2="2900" y2="1450" stroke="#FFB020" stroke-width="26"/>
+        <line x1="1600" y1="750" x2="1900" y2="950" stroke="#35C8C4" stroke-width="26"/>
+      </svg>
+      <div class="cap">VEH 150,1150 → 2900,1450<br>PPL 1600,750 → 1900,950</div>
+    </div>
+    <div>
+      <div class="sitehead"><h3>Spadina &amp; Blue Jays Way</h3><span class="when">JUL 16 · EVENING · 1.8 MIN</span></div>
+      <div class="metrics">
+        <div class="m v">
+          <div class="head">Vehicles</div>
+          <div class="raw">57<small>in a 1.8 min window</small></div>
+          <div class="est">≈ 1,922 / hr<em>projected from the sample above</em></div>
+          <div class="conf">0.72 <span class="meter"><i style="width:72%"></i></span> confidence</div>
+          <div class="classes">49 car · 4 truck · 3 bicycle · 1 bus</div>
+          <button class="proof" data-clip="spadinabluejay_vehicles" data-site="Spadina &amp; Blue Jays Way" data-stream="Vehicle count" data-stat="57 vehicles · 1.8 min · conf 0.72">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>FOOTAGE</button>
+        </div>
+        <div class="m p">
+          <div class="head">People</div>
+          <div class="raw">46<small>in a 1.8 min window</small></div>
+          <div class="est">≈ 1,551 / hr<em>projected from the sample above</em></div>
+          <div class="conf">0.56 <span class="meter"><i style="width:56%"></i></span> confidence</div>
+          <div class="classes">sidewalk and crossing traffic</div>
+          <button class="proof" data-clip="spadinabluejay_people" data-site="Spadina &amp; Blue Jays Way" data-stream="People count" data-stat="46 people · 1.8 min · conf 0.56">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>FOOTAGE</button>
+        </div>
+      </div>
+      <div class="note"><b>Shortest sample in the set</b> — 1.8 minutes, so the hourly projection carries the most uncertainty here. Treat it as directional until re-sampled over a longer window.</div>
+    </div>
+  </article>
+
+  <!-- King & Portland -->
+  <article class="site">
+    <div class="schem">
+      <svg viewBox="0 0 3840 2160" role="img" aria-label="Counting lines on frame">
+        <g stroke="#26333F" stroke-width="4"><path d="M0 720H3840M0 1440H3840M1280 0V2160M2560 0V2160"/></g>
+        <line x1="1250" y1="350" x2="1900" y2="350" stroke="#FFB020" stroke-width="26"/>
+        <line x1="2700" y1="900" x2="2700" y2="1700" stroke="#35C8C4" stroke-width="26"/>
+      </svg>
+      <div class="cap">VEH 1250,350 → 1900,350<br>PPL 2700,900 → 2700,1700</div>
+    </div>
+    <div>
+      <div class="sitehead"><h3>King &amp; Portland</h3><span class="when">JUL 16 · 17:34 · 3.2 MIN</span></div>
+      <div class="metrics">
+        <div class="m v">
+          <div class="head">Vehicles</div>
+          <div class="raw">24<small>in a 3.2 min window</small></div>
+          <div class="est">≈ 455 / hr<em>projected from the sample above</em></div>
+          <div class="conf">0.74 <span class="meter"><i style="width:74%"></i></span> confidence</div>
+          <div class="classes">24 car · line across Portland's approach</div>
+          <button class="proof" data-clip="kingportland_vehicles" data-site="King &amp; Portland" data-stream="Vehicle count" data-stat="24 vehicles · 3.2 min · conf 0.74">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>FOOTAGE</button>
+        </div>
+        <div class="m p">
+          <div class="head">People</div>
+          <div class="raw">119<small>in a 3.2 min window</small></div>
+          <div class="est">≈ 2,254 / hr<em>projected from the sample above</em></div>
+          <div class="conf">0.54 <span class="meter"><i style="width:54%"></i></span> confidence</div>
+          <div class="classes">crossing beside the streetcar stop</div>
+          <button class="proof" data-clip="kingportland_people" data-site="King &amp; Portland" data-stream="People count" data-stat="119 people · 3.2 min · conf 0.54">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>FOOTAGE</button>
+        </div>
+      </div>
+      <div class="note"><b>Highest footfall measured, lowest car volume.</b> King is transit-priority here, which is exactly why the ratio flips. Dense crowds also mean this count runs conservative — people overlap and merge.</div>
+    </div>
+  </article>
+
+  <!-- Arcadia entrance -->
+  <article class="site">
+    <div class="schem">
+      <svg viewBox="0 0 3840 2160" role="img" aria-label="Counting lines on frame">
+        <g stroke="#26333F" stroke-width="4"><path d="M0 720H3840M0 1440H3840M1280 0V2160M2560 0V2160"/></g>
+        <line x1="1900" y1="100" x2="2200" y2="1000" stroke="#FFB020" stroke-width="26"/>
+        <line x1="1710" y1="700" x2="2200" y2="100" stroke="#35C8C4" stroke-width="26"/>
+      </svg>
+      <div class="cap">VEH 1900,100 → 2200,1000<br>PPL 1710,700 → 2200,100</div>
+    </div>
+    <div>
+      <div class="sitehead"><h3>The Well — Arcadia entrance</h3><span class="when">JUL 13 · 2.9 MIN</span></div>
+      <div class="metrics">
+        <div class="m v">
+          <div class="head">Vehicles</div>
+          <div class="raw">26<small>in a 2.9 min window</small></div>
+          <div class="est">≈ 538 / hr<em>projected from the sample above</em></div>
+          <div class="conf">0.74 <span class="meter"><i style="width:74%"></i></span> confidence</div>
+          <div class="classes">23 car · 2 motorcycle · 1 truck</div>
+          <button class="proof" data-clip="entrance1_vehicles" data-site="The Well — Arcadia entrance" data-stream="Vehicle count" data-stat="26 vehicles · 2.9 min · conf 0.74">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>FOOTAGE</button>
+        </div>
+        <div class="m p">
+          <div class="head">People</div>
+          <div class="raw">86<small>in a 2.9 min window</small></div>
+          <div class="est">≈ 1,779 / hr<em>projected from the sample above</em></div>
+          <div class="conf">0.48 <span class="meter"><i style="width:48%"></i></span> confidence</div>
+          <div class="classes">entering through the doorway</div>
+          <button class="proof" data-clip="entrance1_people" data-site="The Well — Arcadia entrance" data-stream="People count" data-stat="86 people · 2.9 min · conf 0.48 — a floor">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>FOOTAGE</button>
+        </div>
+      </div>
+      <div class="note"><b>A doorway, not a street.</b> Only a narrow strip of road sits in frame, so the vehicle figure describes that strip and not the site's total car access. People counted at 0.48 — the lowest in the set — so 86 is a floor.</div>
+    </div>
+  </article>
+
+  <!-- Concord frontage -->
+  <article class="site">
+    <div class="schem">
+      <svg viewBox="0 0 3840 2160" role="img" aria-label="Counting lines on frame">
+        <g stroke="#26333F" stroke-width="4"><path d="M0 720H3840M0 1440H3840M1280 0V2160M2560 0V2160"/></g>
+        <line x1="100" y1="1900" x2="2400" y2="1750" stroke="#FFB020" stroke-width="26"/>
+        <line x1="1500" y1="1250" x2="1500" y2="1600" stroke="#35C8C4" stroke-width="26"/>
+      </svg>
+      <div class="cap">VEH 100,1900 → 2400,1750<br>PPL 1500,1250 → 1500,1600</div>
+    </div>
+    <div>
+      <div class="sitehead"><h3>Spadina — Concord frontage</h3><span class="when">JUL 16 · 18:09 · 2.9 MIN</span></div>
+      <div class="metrics">
+        <div class="m v">
+          <div class="head">Vehicles</div>
+          <div class="raw">30<small>in a 2.9 min window</small></div>
+          <div class="est">≈ 621 / hr<em>projected from the sample above</em></div>
+          <div class="conf">0.65 <span class="meter"><i style="width:65%"></i></span> confidence</div>
+          <div class="classes">28 car · 1 motorcycle · 1 bicycle</div>
+          <button class="proof" data-clip="spadina1_vehicles" data-site="Spadina — Concord frontage" data-stream="Vehicle count" data-stat="30 vehicles · 2.9 min · conf 0.65">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>FOOTAGE</button>
+        </div>
+        <div class="m p">
+          <div class="head">People</div>
+          <div class="raw">21<small>in a 2.9 min window</small></div>
+          <div class="est">≈ 434 / hr<em>projected from the sample above</em></div>
+          <div class="conf">0.63 <span class="meter"><i style="width:63%"></i></span> confidence</div>
+          <div class="classes">walking the retail frontage</div>
+          <button class="proof" data-clip="spadina1_people" data-site="Spadina — Concord frontage" data-stream="People count" data-stat="21 people · 2.9 min · conf 0.63">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>FOOTAGE</button>
+        </div>
+      </div>
+      <div class="note"><b>Measured directly outside a unit that's currently for lease.</b> This is the exposure profile of a specific marketed space: roughly 620 vehicles and 434 people past the door per hour at 6pm on a weekday.</div>
+    </div>
+  </article>
+
+  <!-- Front St -->
+  <article class="site">
+    <div class="schem">
+      <svg viewBox="0 0 3840 2160" role="img" aria-label="Counting lines on frame">
+        <g stroke="#26333F" stroke-width="4"><path d="M0 720H3840M0 1440H3840M1280 0V2160M2560 0V2160"/></g>
+        <line x1="1600" y1="1300" x2="2100" y2="1500" stroke="#FFB020" stroke-width="26"/>
+        <line x1="750" y1="550" x2="1050" y2="850" stroke="#35C8C4" stroke-width="26"/>
+      </svg>
+      <div class="cap">VEH 1600,1300 → 2100,1500<br>PPL 750,550 → 1050,850</div>
+    </div>
+    <div>
+      <div class="sitehead"><h3>The Well — Front St frontage</h3><span class="when">JUL 14 · MIDDAY · 2.7 MIN</span></div>
+      <div class="metrics">
+        <div class="m v">
+          <div class="head">Vehicles</div>
+          <div class="raw">24<small>in a 2.7 min window</small></div>
+          <div class="est">≈ 536 / hr<em>projected from the sample above</em></div>
+          <div class="conf">0.77 <span class="meter"><i style="width:77%"></i></span> confidence</div>
+          <div class="classes">22 car · 2 truck</div>
+          <button class="proof" data-clip="wellnoon_vehicles" data-site="The Well — Front St frontage" data-stream="Vehicle count" data-stat="24 vehicles · 2.7 min · conf 0.77">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>FOOTAGE</button>
+        </div>
+        <div class="m p">
+          <div class="head">People</div>
+          <div class="raw">18<small>in a 2.7 min window</small></div>
+          <div class="est">≈ 402 / hr<em>projected from the sample above</em></div>
+          <div class="conf">0.52 <span class="meter"><i style="width:52%"></i></span> confidence</div>
+          <div class="classes">plaza walkway between storefront and road</div>
+          <button class="proof" data-clip="wellnoon_people" data-site="The Well — Front St frontage" data-stream="People count" data-stat="18 people · 2.7 min · conf 0.52">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>FOOTAGE</button>
+        </div>
+      </div>
+      <div class="note"><b>Highest detection confidence in the set at 0.77.</b> A road-and-plaza view rather than a doorway, which is why footfall reads lower here than at the Arcadia entrance a block away.</div>
+    </div>
+  </article>
+
+  <p class="sub" style="margin-top:8px">Want the same measurement for your own address? <a href="contact.html" style="color:var(--teal);text-decoration:none">Get a quote →</a></p>
+
+</div>
+
+<footer class="sitefoot">
+  <span>SITELINE · TORONTO</span>
+  <span>MEASURED JUL 13–17, 2026 · 665 CROSSINGS · <a href="mailto:sitelineto@gmail.com">sitelineto@gmail.com</a></span>
+</footer>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbTitle">
+  <div class="lbbox" id="lbbox">
+    <div class="lbtop">
+      <div class="lbtitle" id="lbTitle">Site<span id="lbStream">stream</span></div>
+      <button class="lbx" id="lbClose" aria-label="Close footage">✕</button>
+    </div>
+    <video id="lbVid" controls playsinline preload="none"></video>
+    <div class="lberr" id="lbErr">Clip not found. Generate the proof clips first:<br><br><code>bash ~/siteline/make_clips.sh</code></div>
+    <div class="lbfoot">
+      <span id="lbStat">—</span>
+      <span>ANNOTATED EXPORT · 20s EXCERPT · COUNTING LINE IN RED</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const lb=document.getElementById('lb'), vid=document.getElementById('lbVid'),
+    err=document.getElementById('lbErr'), title=document.getElementById('lbTitle'),
+    strm=document.getElementById('lbStream'), stat=document.getElementById('lbStat');
+  let lastFocus=null;
+  function open(btn){
+    lastFocus=btn;
+    title.childNodes[0].nodeValue=btn.dataset.site;
+    strm.textContent=btn.dataset.stream;
+    stat.textContent=btn.dataset.stat;
+    err.style.display='none'; vid.style.display='block';
+    vid.src='clips/'+btn.dataset.clip+'.mp4';
+    lb.classList.add('on'); document.body.classList.add('locked');
+    vid.play().catch(function(){});
+    document.getElementById('lbClose').focus();
+  }
+  function close(){
+    lb.classList.remove('on'); document.body.classList.remove('locked');
+    vid.pause(); vid.removeAttribute('src'); vid.load();
+    if(lastFocus) lastFocus.focus();
+  }
+  vid.addEventListener('error', function(){ if(!vid.getAttribute('src')) return; vid.style.display='none'; err.style.display='block'; });
+  document.querySelectorAll('.proof').forEach(function(b){ b.addEventListener('click', function(){ open(b); }); });
+  document.getElementById('lbClose').addEventListener('click', close);
+  lb.addEventListener('click', function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && lb.classList.contains('on')) close(); });
+})();
+</script>
+</body>
+</html>

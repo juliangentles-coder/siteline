@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — SITELINE</title>
+<meta name="description" content="Tell SITELINE what you want measured. Get a sample report and a quote back the same week.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="topbrand" href="index.html"><div class="mark" aria-hidden="true"></div><span>SITELINE</span></a>
+    <div class="toplinks">
+      <a href="index.html">Home</a>
+      <a href="data.html">The Data</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sample-report.html">Sample Report</a>
+      <a href="method.html">Method &amp; Privacy</a>
+      <a href="contact.html" class="active">Contact</a>
+    </div>
+    <a class="topcta" href="mailto:sitelineto@gmail.com?subject=SITELINE%20traffic%20profile%20request">Request a report →</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="pagehero">
+    <div class="kicker">Same-week quote</div>
+    <h1>Tell us what you want measured.</h1>
+    <p>Send the address and what you're deciding — you'll get a sample report and a quote back
+      the same week. Local Toronto operator, rooftop and drone capture, every report states
+      exactly how and when the data was captured.</p>
+  </div>
+
+  <div class="contactcard" style="max-width:560px">
+    <h3>Request a report</h3>
+    <p>Fill this in and it opens a pre-filled email to sitelineto@gmail.com — nothing is stored
+      or sent anywhere else.</p>
+
+    <form id="quoteForm">
+      <div class="field">
+        <label for="fname">Name</label>
+        <input id="fname" type="text" placeholder="Your name" required>
+      </div>
+      <div class="field">
+        <label for="femail">Email</label>
+        <input id="femail" type="email" placeholder="you@company.com" required>
+      </div>
+      <div class="field">
+        <label for="faddr">Site / address</label>
+        <input id="faddr" type="text" placeholder="e.g. 123 Spadina Ave, Toronto">
+      </div>
+      <div class="field">
+        <label for="fwhat">What do you want measured?</label>
+        <textarea id="fwhat" placeholder="e.g. vehicle and foot traffic, peak vs. off-peak, for a leasing conversation"></textarea>
+      </div>
+      <button type="submit" class="btn-amber" style="border:none;cursor:pointer;font-size:14px">Send inquiry →</button>
+    </form>
+  </div>
+
+  <p class="sub" style="max-width:560px">Prefer email directly? <a href="mailto:sitelineto@gmail.com" style="color:var(--teal);text-decoration:none">sitelineto@gmail.com</a></p>
+
+</div>
+
+<footer class="sitefoot">
+  <span>SITELINE · TORONTO</span>
+  <span>MEASURED JUL 13–17, 2026 · 665 CROSSINGS · <a href="mailto:sitelineto@gmail.com">sitelineto@gmail.com</a></span>
+</footer>
+
+<script>
+document.getElementById('quoteForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var name = document.getElementById('fname').value;
+  var email = document.getElementById('femail').value;
+  var addr = document.getElementById('faddr').value;
+  var what = document.getElementById('fwhat').value;
+  var body = 'Name: ' + name + '\nEmail: ' + email + '\nSite/address: ' + addr + '\nWhat to measure: ' + what;
+  var mailto = 'mailto:sitelineto@gmail.com?subject=' + encodeURIComponent('SITELINE report request — ' + (addr || name)) +
+    '&body=' + encodeURIComponent(body);
+  window.location.href = mailto;
+});
+</script>
+</body>
+</html>

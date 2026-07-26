@@ -3,333 +3,43 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SITELINE — Measured traffic, Toronto</title>
-<meta name="description" content="Foot and vehicle traffic measured from aerial footage at six Toronto locations. Every number shows the window it came from, and the footage it came from.">
+<title>SITELINE — Aerial site intelligence, Toronto</title>
+<meta name="description" content="Traffic counts, foot traffic, parking occupancy, and roof assessments from aerial and rooftop footage. Real counts from real vantage points — not estimates.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --void:#0B0F14;
-    --panel:#131A22;
-    --panel2:#19222C;
-    --rule:#26333F;
-    --ink:#E8EEF2;
-    --dim:#7A8894;
-    --amber:#FFB020;
-    --teal:#35C8C4;
-    --linered:#FF4D4D;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    margin:0;background:var(--void);color:var(--ink);
-    font-family:'Inter',system-ui,sans-serif;line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-  }
-  body.locked{overflow:hidden}
-  .wrap{max-width:1000px;margin:0 auto;padding:32px 20px 64px}
-  h1,h2,h3{font-family:'Space Grotesk',sans-serif;margin:0}
-  :focus-visible{outline:2px solid var(--teal);outline-offset:2px}
-
-  /* ---------- masthead ---------- */
-  .mast{border-bottom:1px solid var(--rule);padding-bottom:22px;
-    display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
-  .brandrow{display:flex;align-items:center;gap:13px}
-  .mark{width:36px;height:36px;flex:none;border:1.5px solid var(--amber);border-radius:8px;
-    display:grid;place-items:center;position:relative;overflow:hidden}
-  .mark:before{content:"";width:11px;height:11px;border:1.5px solid var(--amber);border-radius:50%}
-  .mark:after{content:"";position:absolute;width:26px;height:1.5px;background:var(--linered);
-    transform:rotate(-34deg)}
-  h1{font-size:21px;font-weight:700;letter-spacing:.18em}
-  .tag{color:var(--dim);font-size:12.5px;letter-spacing:.03em}
-  .where{text-align:right;font-family:'JetBrains Mono',monospace;font-size:11.5px;
-    color:var(--dim);letter-spacing:.08em;line-height:1.8}
-
-  .lede{margin:26px 0 30px;font-size:16.5px;max-width:62ch;color:#C6D2DB}
-  .lede strong{color:var(--ink);font-weight:500}
-
-  /* ---------- totals ---------- */
-  .totals{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);
-    border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin-bottom:38px}
-  .tot{background:var(--panel);padding:15px 16px}
-  .tot .n{font-family:'JetBrains Mono',monospace;font-size:25px;font-weight:700;line-height:1}
-  .tot .n u{text-decoration:none;font-size:13px;color:var(--dim);font-weight:400}
-  .tot .l{color:var(--dim);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
-    font-family:'JetBrains Mono',monospace;margin-top:8px}
-
-  /* ---------- section head ---------- */
-  .shead{display:flex;align-items:baseline;gap:12px;margin:0 0 6px;flex-wrap:wrap}
-  .shead h2{font-size:15px;letter-spacing:.11em;text-transform:uppercase;font-weight:500}
-  .shead .hint{color:var(--dim);font-size:12.5px}
-  .sub{color:var(--dim);font-size:13.5px;margin:0 0 20px;max-width:64ch}
-
-  /* ---------- profile ---------- */
-  .profile{background:var(--panel);border:1px solid var(--rule);border-radius:10px;
-    padding:20px 18px;margin-bottom:44px}
-  .key{display:flex;gap:18px;justify-content:flex-end;margin-bottom:16px;
-    font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;color:var(--dim)}
-  .key i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px}
-  .prow{margin-bottom:15px}
-  .prow:last-child{margin-bottom:0}
-  .pname{font-size:13px;margin-bottom:6px;display:flex;justify-content:space-between;gap:10px}
-  .pname span:last-child{color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:10.5px}
-  .bars{display:grid;gap:4px}
-  .bar{height:15px;border-radius:3px;position:relative;background:#1E2833;width:100%;overflow:hidden}
-  .bar i{position:absolute;inset:0 auto 0 0;border-radius:3px;display:block;min-width:34px}
-  .bar b{position:absolute;right:8px;top:50%;transform:translateY(-50%);
-    font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#0B0F14;
-    white-space:nowrap;mix-blend-mode:normal}
-
-  /* ---------- site cards ---------- */
-  .site{background:var(--panel);border:1px solid var(--rule);border-radius:10px;
-    padding:18px;margin-bottom:14px;display:grid;grid-template-columns:190px 1fr;gap:20px}
-  .schem{align-self:start}
-  .schem svg{width:100%;height:auto;display:block;border-radius:6px;background:#0E141A;border:1px solid var(--rule)}
-  .tw{position:relative;margin-bottom:7px;border-radius:6px;overflow:hidden;border:1px solid var(--rule)}
-  .tw.v{border-color:rgba(255,176,32,.45)} .tw.p{border-color:rgba(53,200,196,.45)}
-  .tw:hover{border-width:1px}
-  .tw.v:hover{border-color:var(--amber)} .tw.p:hover{border-color:var(--teal)}
-  .tl{position:absolute;left:6px;bottom:5px;font-family:'JetBrains Mono',monospace;
-    font-size:8px;letter-spacing:.14em;padding:2px 5px;border-radius:3px;
-    background:rgba(11,15,20,.78);pointer-events:none}
-  .tw.v .tl{color:var(--amber)} .tw.p .tl{color:var(--teal)}
-  .schem video.thumb{width:100%;height:auto;display:block;border-radius:6px;background:#000;
-    cursor:pointer;aspect-ratio:16/9;object-fit:cover;
-    transition:border-color .15s}
-  .schem video.thumb:hover{border-color:var(--amber)}
-  .schem .cap{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--dim);
-    margin-top:7px;line-height:1.6;letter-spacing:.02em}
-  .sitehead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
-    flex-wrap:wrap;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
-  .sitehead h3{font-size:16.5px;font-weight:500}
-  .when{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.05em}
-  .metrics{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .m .head{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;
-    text-transform:uppercase;margin-bottom:9px}
-  .m.v .head{color:var(--amber)} .m.p .head{color:var(--teal)}
-  .raw{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:19px;
-    line-height:1.15;color:#C6D2DB}
-  .raw small{font-size:12px;font-weight:400;color:var(--dim);display:block;margin-top:3px;
-    letter-spacing:.02em}
-  .est{margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:700;
-    line-height:1.15;letter-spacing:-.01em}
-  .est em{font-style:normal;color:var(--dim);font-size:10px;display:block;margin-top:4px;
-    font-weight:400;letter-spacing:.04em;text-transform:uppercase}
-  .conf{margin-top:11px;display:flex;align-items:center;gap:8px;
-    font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim)}
-  .meter{flex:1;max-width:74px;height:4px;background:#1E2833;border-radius:2px;overflow:hidden}
-  .meter i{display:block;height:100%;border-radius:2px}
-  .m.v .meter i{background:var(--amber)} .m.p .meter i{background:var(--teal)}
-  .m.v .est{color:var(--amber)} .m.p .est{color:var(--teal)}
-  .classes{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--dim);
-    margin-top:9px;line-height:1.7}
-
-  /* ---------- the proof button ---------- */
-  .proof{margin-top:12px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;
-    background:transparent;border:1px solid var(--rule);border-radius:6px;
-    padding:7px 11px 7px 8px;color:var(--dim);
-    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.13em;
-    transition:border-color .15s, color .15s, background .15s}
-  .proof svg{width:13px;height:13px;flex:none;transition:transform .15s}
-  .m.v .proof:hover{border-color:var(--amber);color:var(--amber);background:rgba(255,176,32,.07)}
-  .m.p .proof:hover{border-color:var(--teal);color:var(--teal);background:rgba(53,200,196,.07)}
-  .proof:hover svg{transform:scale(1.15)}
-
-  .note{grid-column:1/-1;border-top:1px solid var(--rule);margin-top:4px;padding-top:12px;
-    font-size:12.5px;color:#9FB0BC}
-  .note b{color:var(--ink);font-weight:500}
-
-  /* ---------- method ---------- */
-  .method{background:var(--panel2);border:1px solid var(--rule);border-radius:10px;
-    padding:22px 20px;margin-top:40px}
-  .method h2{font-size:14px;letter-spacing:.11em;text-transform:uppercase;margin-bottom:14px;
-    font-weight:500}
-  .method ul{margin:0;padding-left:18px;font-size:13.5px;color:#B8C5D0}
-  .method li{margin-bottom:9px}
-  .method li:last-child{margin-bottom:0}
-  .method b{color:var(--ink);font-weight:500}
-  .limits{border-left:2px solid var(--linered);padding-left:14px;margin-top:18px}
-  .limits h3{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--linered);
-    margin-bottom:9px;font-weight:500;font-family:'JetBrains Mono',monospace}
-
-  footer{margin-top:34px;padding-top:20px;border-top:1px solid var(--rule);
-    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-    font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--dim);letter-spacing:.05em}
-
-  /* ---------- lightbox ---------- */
-  .lb{position:fixed;inset:0;z-index:50;display:none;
-    background:rgba(5,8,11,.9);backdrop-filter:blur(6px);
-    padding:24px;overflow-y:auto}
-  .lb.on{display:flex;align-items:center;justify-content:center}
-  .lbbox{width:100%;max-width:880px;background:var(--panel);border:1px solid var(--rule);
-    border-radius:12px;overflow:hidden;animation:pop .18s ease-out}
-  @keyframes pop{from{opacity:0;transform:translateY(8px) scale(.99)}to{opacity:1;transform:none}}
-  .lbtop{display:flex;justify-content:space-between;align-items:center;gap:14px;
-    padding:13px 15px;border-bottom:1px solid var(--rule)}
-  .lbtitle{font-family:'Space Grotesk',sans-serif;font-size:14.5px;font-weight:500}
-  .lbtitle span{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;
-    color:var(--dim);letter-spacing:.11em;margin-top:3px;text-transform:uppercase}
-  .lbx{background:transparent;border:1px solid var(--rule);border-radius:6px;
-    color:var(--dim);cursor:pointer;width:30px;height:30px;flex:none;font-size:15px;line-height:1;
-    transition:border-color .15s,color .15s}
-  .lbx:hover{border-color:var(--linered);color:var(--linered)}
-  .lb video{display:block;width:100%;background:#000;max-height:66vh}
-  .lbfoot{padding:12px 15px;display:flex;justify-content:space-between;align-items:center;
-    gap:14px;flex-wrap:wrap;
-    font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--dim);letter-spacing:.05em}
-  .lbfoot b{color:var(--ink);font-weight:700}
-  .lberr{padding:34px 18px;text-align:center;color:var(--dim);font-size:13px;display:none}
-  .lberr code{color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:11.5px}
-
-  @media (max-width:760px){
-    .totals{grid-template-columns:1fr 1fr}
-    .site{grid-template-columns:1fr}
-    .schem{max-width:220px}
-    .metrics{grid-template-columns:1fr;gap:20px}
-    .lb{padding:12px}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .lbbox{animation:none}
-    .proof,.proof svg{transition:none}
-  }
-
-  /* ===== UI UPGRADE OVERRIDES ===== */
-  .wrap{max-width:1080px;padding:44px 24px 88px}
-  section, .profile, .method{margin-bottom:64px !important}
-  .shead{margin-bottom:10px}
-  .shead h2{font-size:13px;letter-spacing:.16em;color:var(--dim);font-weight:600}
-  .sub{font-size:14px;line-height:1.65;margin-bottom:28px;color:#93A0AC}
-  .site{padding:26px !important;margin-bottom:20px !important;gap:26px !important;border-radius:14px}
-  .sitehead{margin-bottom:20px;padding-bottom:16px}
-  .sitehead h3{font-size:19px}
-  .metrics{gap:24px}
-  .lead{font-size:15px;line-height:1.7;max-width:none}
-  .totals{margin-bottom:56px;border-radius:14px}
-  .tot{padding:20px 22px}
-  .profile{padding:28px 26px;border-radius:14px}
-  .prow{margin-bottom:20px}
-  .method{padding:30px 28px;border-radius:14px}
-  .raw{font-size:18px}
-  .cap,.classes,.when,.conf{font-size:10px}
-  @media (max-width:760px){.wrap{padding:28px 16px 60px} .site{padding:18px !important}}
-
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="topbrand" href="index.html"><div class="mark" aria-hidden="true"></div><span>SITELINE</span></a>
+    <div class="toplinks">
+      <a href="index.html" class="active">Home</a>
+      <a href="data.html">The Data</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sample-report.html">Sample Report</a>
+      <a href="method.html">Method &amp; Privacy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a class="topcta" href="mailto:sitelineto@gmail.com?subject=SITELINE%20traffic%20profile%20request">Request a report →</a>
+  </div>
+</nav>
+
 <div class="wrap">
 
-  <header class="mast">
-    <div class="brandrow">
-      <div class="mark" aria-hidden="true"></div>
-      <div>
-        <h1>SITELINE</h1>
-        <div class="tag">Measured street traffic · Toronto</div>
-      </div>
+  <section class="hero">
+    <h1>Ground-truth data on your streets, lots, and buildings — from above.</h1>
+    <p class="lede">SITELINE captures aerial and rooftop footage across Toronto and turns it into
+      hard numbers: traffic volume, foot traffic, parking occupancy, and roof assessments.
+      <strong>Real counts from real vantage points — not estimates.</strong> Every number ships with
+      the annotated footage it came from.</p>
+    <div class="herobtns">
+      <a class="btn-amber" href="sample-report.html">See a sample report →</a>
+      <a class="btn-ghost" href="data.html">See the measured sites</a>
     </div>
-    <div class="where">
-      6 SITES · KING WEST / FORT YORK<br>
-      CAPTURED JUL 13–17, 2026
-    </div>
-  </header>
-
-  <!-- ===== HERO ===== -->
-  <div style="margin:30px 0 40px;">
-    <div style="font-family:'Space Grotesk',sans-serif;font-size:27px;line-height:1.25;
-      font-weight:600;color:var(--ink);max-width:18ch;margin-bottom:22px;">
-      Watch the count happen.</div>
-    <div style="border:1px solid var(--rule);border-radius:14px;overflow:hidden;background:#000;
-      position:relative;">
-      <video autoplay muted loop playsinline preload="metadata"
-        style="display:block;width:100%;max-height:440px;object-fit:cover;">
-        <source src="clips/kingportland_people.mp4" type="video/mp4">
-      </video>
-      <div style="position:absolute;left:16px;bottom:14px;background:rgba(11,15,20,.74);
-        border:1px solid var(--rule);border-radius:7px;padding:8px 13px;
-        font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.05em;color:var(--ink);">
-        <span style="color:var(--teal)">119 people</span> counted &middot; King &amp; Portland &middot; 3.2 min
-      </div>
-    </div>
-  </div>
-
-
-    <p style="font-family:'Space Grotesk',sans-serif;font-size:19px;line-height:1.5;
-    color:#E8EEF2;max-width:60ch;margin:24px 0 0;font-weight:500;">
-    Know how much foot and vehicle traffic passes any Toronto location &mdash;
-    <span style="color:#FFB020">before you sign the lease, place the store, or price the space.</span>
-  </p>
-
-  
-  
-
-  <p class="lede">
-    Every count below came from aerial video of a real Toronto street, run through object
-    detection and tracked frame to frame. <strong>Each number shows the window it was measured
-    in — and the footage it was measured from.</strong> Where a rate is projected to an hour, it
-    says so, because a three-minute sample is a three-minute sample.
-  </p>
-
-  
-  <!-- ===== USE-CASE BAND ===== -->
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
-    border:1px solid var(--rule);border-radius:14px;overflow:hidden;margin:8px 0 56px;">
-    <div style="background:var(--panel);padding:22px 20px;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;
-        text-transform:uppercase;color:var(--amber);margin-bottom:9px;">For leasing brokers</div>
-      <div style="font-size:13.5px;color:#C6D2DB;line-height:1.6;">Hard footfall and vehicle
-        numbers to market a vacant unit and close faster.</div>
-    </div>
-    <div style="background:var(--panel);padding:22px 20px;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;
-        text-transform:uppercase;color:var(--teal);margin-bottom:9px;">For developers</div>
-      <div style="font-size:13.5px;color:#C6D2DB;line-height:1.6;">Ground-truth traffic on a site
-        before you commit &mdash; measured, not modelled.</div>
-    </div>
-    <div style="background:var(--panel);padding:22px 20px;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.16em;
-        text-transform:uppercase;color:var(--amber);margin-bottom:9px;">For retailers</div>
-      <div style="font-size:13.5px;color:#C6D2DB;line-height:1.6;">Know how busy a corner really is
-        at the hours that matter, before you sign.</div>
-    </div>
-  </div>
-
-  
-  <!-- ===== HOW IT WORKS ===== -->
-  <div class="shead"><h2>How it works</h2><span class="hint">three steps, one deliverable</span></div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;">
-    <div style="background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:16px 18px;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;
-        text-transform:uppercase;color:var(--amber);margin-bottom:8px;">01 · Capture</div>
-      <div style="font-size:13px;color:#C6D2DB;line-height:1.65;">Aerial and rooftop footage of your
-        site, framed specifically for measurement — not a flyover reel.</div>
-    </div>
-    <div style="background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:16px 18px;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;
-        text-transform:uppercase;color:var(--teal);margin-bottom:8px;">02 · Analyze</div>
-      <div style="font-size:13px;color:#C6D2DB;line-height:1.65;">Computer-vision detection tracks
-        every vehicle and person frame-to-frame, counted once as it crosses a fixed line.</div>
-    </div>
-    <div style="background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:16px 18px;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;
-        text-transform:uppercase;color:var(--amber);margin-bottom:8px;">03 · Report</div>
-      <div style="font-size:13px;color:#C6D2DB;line-height:1.65;">A decision-ready PDF and this
-        dashboard, with the annotated footage behind every number.</div>
-    </div>
-  </div>
-
-  <div style="margin:0 0 40px;">
-    <a href="SITELINE_sample_report.pdf" target="_blank" rel="noopener"
-      style="display:inline-flex;align-items:center;gap:9px;background:var(--panel2);
-      border:1px solid var(--rule);border-radius:8px;padding:10px 16px;text-decoration:none;
-      color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.04em;">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
-      Download the sample report (PDF)
-    </a>
-  </div>
+  </section>
 
   <div class="totals">
     <div class="tot"><div class="n">6</div><div class="l">Sites measured</div></div>
@@ -338,35 +48,62 @@
     <div class="tot"><div class="n" style="color:var(--teal)">347</div><div class="l">People counted</div></div>
   </div>
 
-  <!-- ============ PROFILE ============ -->
-  <div class="shead">
-    <h2>Traffic profile</h2>
-    <span class="hint">the thing a listing can't tell you</span>
+  <!-- ===== HOW IT WORKS ===== -->
+  <div class="shead"><h2>How it works</h2><span class="hint">three steps, one deliverable</span></div>
+  <div class="grid3">
+    <div class="card3">
+      <div class="k">01 · Capture</div>
+      <p>Aerial and rooftop footage of your site, framed specifically for measurement — not a
+        flyover reel.</p>
+    </div>
+    <div class="card3">
+      <div class="k teal">02 · Analyze</div>
+      <p>Computer-vision detection tracks every vehicle and person frame-to-frame, counted once as
+        it crosses a fixed line.</p>
+    </div>
+    <div class="card3">
+      <div class="k">03 · Report</div>
+      <p>A decision-ready PDF and a live dashboard, with the annotated footage behind every
+        number.</p>
+    </div>
   </div>
-  <p class="sub">
-    Two corners a few hundred metres apart behave nothing alike. King &amp; Portland moves people.
-    Spadina &amp; Fort York moves cars. Bars are projected hourly rates, scaled against the busiest
-    site measured.
-  </p>
+
+  <!-- ===== WHO IT'S FOR ===== -->
+  <div class="shead" style="margin-top:36px"><h2>Who this is for</h2></div>
+  <div class="grid3">
+    <div class="card3">
+      <div class="k">For leasing brokers</div>
+      <p>Hard footfall and vehicle numbers to market a vacant unit and close faster.</p>
+    </div>
+    <div class="card3">
+      <div class="k teal">For developers</div>
+      <p>Ground-truth traffic on a site before you commit — measured, not modelled.</p>
+    </div>
+    <div class="card3">
+      <div class="k">For retailers</div>
+      <p>Know how busy a corner really is at the hours that matter, before you sign.</p>
+    </div>
+  </div>
+
+  <!-- ===== PROOF TEASER ===== -->
+  <div class="shead" style="margin-top:36px">
+    <h2>Two corners, two different stories</h2>
+    <span class="hint">a preview — six sites measured in full</span>
+  </div>
+  <p class="sub">King &amp; Portland moves people. Spadina &amp; Fort York moves cars. Matching the
+    tenant or the study to the corner's actual traffic type is the difference this measurement
+    makes.</p>
 
   <div class="profile">
     <div class="key">
       <span><i style="background:var(--amber)"></i>VEHICLES/HR</span>
       <span><i style="background:var(--teal)"></i>PEOPLE/HR</span>
     </div>
-
     <div class="prow">
       <div class="pname"><span>Spadina &amp; Fort York</span><span>VEHICLE-DOMINANT</span></div>
       <div class="bars">
         <div class="bar" style="--w:100%"><i style="width:100%;background:var(--amber)"></i><b>3,453</b></div>
         <div class="bar" style="--w:36.3%"><i style="width:36.3%;background:var(--teal)"></i><b>1,254</b></div>
-      </div>
-    </div>
-    <div class="prow">
-      <div class="pname"><span>Spadina &amp; Blue Jays Way</span><span>MIXED</span></div>
-      <div class="bars">
-        <div class="bar" style="--w:55.7%"><i style="width:55.7%;background:var(--amber)"></i><b>1,922</b></div>
-        <div class="bar" style="--w:44.9%"><i style="width:44.9%;background:var(--teal)"></i><b>1,551</b></div>
       </div>
     </div>
     <div class="prow">
@@ -376,428 +113,25 @@
         <div class="bar" style="--w:65.3%"><i style="width:65.3%;background:var(--teal)"></i><b>2,254</b></div>
       </div>
     </div>
-    <div class="prow">
-      <div class="pname"><span>The Well — Arcadia entrance</span><span>PEDESTRIAN-DOMINANT</span></div>
-      <div class="bars">
-        <div class="bar" style="--w:15.6%"><i style="width:15.6%;background:var(--amber)"></i><b>538</b></div>
-        <div class="bar" style="--w:51.5%"><i style="width:51.5%;background:var(--teal)"></i><b>1,779</b></div>
-      </div>
+  </div>
+  <p style="margin:-8px 0 44px"><a href="data.html" class="mono" style="color:var(--teal);font-size:13px;text-decoration:none;">See all 6 sites, raw counts, and the footage behind them →</a></p>
+
+  <!-- ===== CTA ===== -->
+  <div class="contactcard" style="display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:8px">
+    <div>
+      <h3 style="margin-bottom:5px">Want this for your own site or corridor?</h3>
+      <p style="margin:0">Send an address and what you're deciding — you'll get a sample report and
+        a quote back the same week.</p>
     </div>
-    <div class="prow">
-      <div class="pname"><span>Spadina — Concord frontage</span><span>MIXED / MODERATE</span></div>
-      <div class="bars">
-        <div class="bar" style="--w:18.0%"><i style="width:18.0%;background:var(--amber)"></i><b>621</b></div>
-        <div class="bar" style="--w:12.6%"><i style="width:12.6%;background:var(--teal)"></i><b>434</b></div>
-      </div>
-    </div>
-    <div class="prow">
-      <div class="pname"><span>The Well — Front St frontage</span><span>MIXED / MODERATE</span></div>
-      <div class="bars">
-        <div class="bar" style="--w:15.5%"><i style="width:15.5%;background:var(--amber)"></i><b>536</b></div>
-        <div class="bar" style="--w:11.6%"><i style="width:11.6%;background:var(--teal)"></i><b>402</b></div>
-      </div>
-    </div>
+    <a class="btn-amber" href="contact.html">Get a quote →</a>
   </div>
 
-  <!-- ============ SITES ============ -->
-  <div class="shead">
-    <h2>The sites</h2>
-    <span class="hint">raw count first, projection second, footage on demand</span>
-  </div>
-  <p class="sub">
-    The diagram on each card is the actual counting line used, drawn at those pixel coordinates on
-    a 3840&times;2160 frame. Hit <em style="font-style:normal;color:#AFBCC7">footage</em> to watch
-    the count happen against it.
-  </p>
-
-  <!-- Fort York -->
-  <article class="site">
-    <div class="schem">
-      <div class="tw v"><video class="thumb" data-clip="spadinafortyork_vehicles" data-site="Spadina &amp; Fort York" data-stream="Vehicle count" data-stat="157 vehicles · 2.7 min · conf 0.76" muted playsinline preload="metadata" src="clips/spadinafortyork_vehicles.mp4#t=3"></video><span class="tl">VEHICLES</span></div>
-      <div class="tw p"><video class="thumb" data-clip="spadinafortyork_people" data-site="Spadina &amp; Fort York" data-stream="People count" data-stat="57 people · 2.7 min · conf 0.55" muted playsinline preload="metadata" src="clips/spadinafortyork_people.mp4#t=3"></video><span class="tl">PEOPLE</span></div>
-      <div class="cap">VEH 700,1700 → 3400,1700<br>PPL 600,1100 → 3400,1100</div>
-    </div>
-    <div>
-      <div class="sitehead">
-        <h3>Spadina &amp; Fort York</h3>
-        <span class="when">JUL 16 · 6:21 PM EDT · 2.7 MIN</span>
-      </div>
-      <div class="metrics">
-        <div class="m v">
-          <div class="head">Vehicles</div>
-          <div class="raw">157<small>in a 2.7 min window</small></div>
-          <div class="est">≈ 3,453 / hr<em>projected from the sample above</em></div>
-          <div class="conf">0.76 <span class="meter"><i style="width:76%"></i></span> confidence</div>
-          <div class="classes">147 car · 5 bus · 3 truck · 2 motorcycle</div>
-          
-        </div>
-        <div class="m p">
-          <div class="head">People</div>
-          <div class="raw">57<small>in a 2.7 min window</small></div>
-          <div class="est">≈ 1,254 / hr<em>projected from the sample above</em></div>
-          <div class="conf">0.55 <span class="meter"><i style="width:55%"></i></span> confidence</div>
-          <div class="classes">pedestrians crossing the north walk</div>
-          
-        </div>
-      </div>
-      <div class="note">
-        <b>Busiest road measured.</b> A five-lane arterial with transit in frame. The vehicle line
-        spans the full carriageway, so nothing passes around either end.
-      </div>
-    </div>
-  </article>
-
-  <!-- Blue Jays Way -->
-  <article class="site">
-    <div class="schem">
-      <div class="tw v"><video class="thumb" data-clip="spadinabluejay_vehicles" data-site="Spadina &amp; Blue Jays Way" data-stream="Vehicle count" data-stat="57 vehicles · 1.8 min · conf 0.72" muted playsinline preload="metadata" src="clips/spadinabluejay_vehicles.mp4#t=3"></video><span class="tl">VEHICLES</span></div>
-      <div class="tw p"><video class="thumb" data-clip="spadinabluejay_people" data-site="Spadina &amp; Blue Jays Way" data-stream="People count" data-stat="46 people · 1.8 min · conf 0.56" muted playsinline preload="metadata" src="clips/spadinabluejay_people.mp4#t=3"></video><span class="tl">PEOPLE</span></div>
-      <div class="cap">VEH 150,1150 → 2900,1450<br>PPL 1600,750 → 1900,950</div>
-    </div>
-    <div>
-      <div class="sitehead">
-        <h3>Spadina &amp; Blue Jays Way</h3>
-        <span class="when">JUL 16 · 6:25 PM EDT · 1.8 MIN</span>
-      </div>
-      <div class="metrics">
-        <div class="m v">
-          <div class="head">Vehicles</div>
-          <div class="raw">57<small>in a 1.8 min window</small></div>
-          <div class="est">≈ 1,922 / hr<em>projected from the sample above</em></div>
-          <div class="conf">0.72 <span class="meter"><i style="width:72%"></i></span> confidence</div>
-          <div class="classes">49 car · 4 truck · 3 bicycle · 1 bus</div>
-          
-        </div>
-        <div class="m p">
-          <div class="head">People</div>
-          <div class="raw">46<small>in a 1.8 min window</small></div>
-          <div class="est">≈ 1,551 / hr<em>projected from the sample above</em></div>
-          <div class="conf">0.56 <span class="meter"><i style="width:56%"></i></span> confidence</div>
-          <div class="classes">sidewalk and crossing traffic</div>
-          
-        </div>
-      </div>
-      <div class="note">
-        <b>Shortest sample in the set</b> — 1.8 minutes, so the hourly projection carries the most
-        uncertainty here. Treat it as directional until re-sampled over a longer window.
-      </div>
-    </div>
-  </article>
-
-  <!-- King & Portland -->
-  <article class="site">
-    <div class="schem">
-      <div class="tw v"><video class="thumb" data-clip="kingportland_vehicles" data-site="King &amp; Portland" data-stream="Vehicle count" data-stat="24 vehicles · 3.2 min · conf 0.74" muted playsinline preload="metadata" src="clips/kingportland_vehicles.mp4#t=3"></video><span class="tl">VEHICLES</span></div>
-      <div class="tw p"><video class="thumb" data-clip="kingportland_people" data-site="King &amp; Portland" data-stream="People count" data-stat="119 people · 3.2 min · conf 0.54" muted playsinline preload="metadata" src="clips/kingportland_people.mp4#t=3"></video><span class="tl">PEOPLE</span></div>
-      <div class="cap">VEH 1250,350 → 1900,350<br>PPL 2700,900 → 2700,1700</div>
-    </div>
-    <div>
-      <div class="sitehead">
-        <h3>King &amp; Portland</h3>
-        <span class="when">JUL 16 · 5:34 PM EDT · 3.2 MIN</span>
-      </div>
-      <div class="metrics">
-        <div class="m v">
-          <div class="head">Vehicles</div>
-          <div class="raw">24<small>in a 3.2 min window</small></div>
-          <div class="est">≈ 455 / hr<em>projected from the sample above</em></div>
-          <div class="conf">0.74 <span class="meter"><i style="width:74%"></i></span> confidence</div>
-          <div class="classes">24 car · line across Portland's approach</div>
-          
-        </div>
-        <div class="m p">
-          <div class="head">People</div>
-          <div class="raw">119<small>in a 3.2 min window</small></div>
-          <div class="est">≈ 2,254 / hr<em>projected from the sample above</em></div>
-          <div class="conf">0.54 <span class="meter"><i style="width:54%"></i></span> confidence</div>
-          <div class="classes">crossing beside the streetcar stop</div>
-          
-        </div>
-      </div>
-      <div class="note">
-        <b>Highest footfall measured, lowest car volume.</b> King is transit-priority here, which is
-        exactly why the ratio flips. Dense crowds also mean this count runs conservative — people
-        overlap and merge.
-      </div>
-    </div>
-  </article>
-
-  <!-- Arcadia entrance -->
-  <article class="site">
-    <div class="schem">
-      <div class="tw v"><video class="thumb" data-clip="entrance1_vehicles" data-site="The Well — Arcadia entrance" data-stream="Vehicle count" data-stat="26 vehicles · 2.9 min · conf 0.74" muted playsinline preload="metadata" src="clips/entrance1_vehicles.mp4#t=3"></video><span class="tl">VEHICLES</span></div>
-      <div class="tw p"><video class="thumb" data-clip="entrance1_people" data-site="The Well — Arcadia entrance" data-stream="People count" data-stat="86 people · 2.9 min · conf 0.48 — a floor" muted playsinline preload="metadata" src="clips/entrance1_people.mp4#t=3"></video><span class="tl">PEOPLE</span></div>
-      <div class="cap">VEH 1900,100 → 2200,1000<br>PPL 1710,700 → 2200,100</div>
-    </div>
-    <div>
-      <div class="sitehead">
-        <h3>The Well — Arcadia entrance</h3>
-        <span class="when">JUL 13 · 3:06 PM EDT · 2.9 MIN</span>
-      </div>
-      <div class="metrics">
-        <div class="m v">
-          <div class="head">Vehicles</div>
-          <div class="raw">26<small>in a 2.9 min window</small></div>
-          <div class="est">≈ 538 / hr<em>projected from the sample above</em></div>
-          <div class="conf">0.74 <span class="meter"><i style="width:74%"></i></span> confidence</div>
-          <div class="classes">23 car · 2 motorcycle · 1 truck</div>
-          
-        </div>
-        <div class="m p">
-          <div class="head">People</div>
-          <div class="raw">86<small>in a 2.9 min window</small></div>
-          <div class="est">≈ 1,779 / hr<em>projected from the sample above</em></div>
-          <div class="conf">0.48 <span class="meter"><i style="width:48%"></i></span> confidence</div>
-          <div class="classes">entering through the doorway</div>
-          
-        </div>
-      </div>
-      <div class="note">
-        <b>A doorway, not a street.</b> Only a narrow strip of road sits in frame, so the vehicle
-        figure describes that strip and not the site's total car access. People counted at 0.48 —
-        the lowest in the set — so 86 is a floor.
-      </div>
-    </div>
-  </article>
-
-  <!-- Concord frontage -->
-  <article class="site">
-    <div class="schem">
-      <div class="tw v"><video class="thumb" data-clip="spadina1_vehicles" data-site="Spadina — Concord frontage" data-stream="Vehicle count" data-stat="30 vehicles · 2.9 min · conf 0.65" muted playsinline preload="metadata" src="clips/spadina1_vehicles.mp4#t=3"></video><span class="tl">VEHICLES</span></div>
-      <div class="tw p"><video class="thumb" data-clip="spadina1_people" data-site="Spadina — Concord frontage" data-stream="People count" data-stat="21 people · 2.9 min · conf 0.63" muted playsinline preload="metadata" src="clips/spadina1_people.mp4#t=3"></video><span class="tl">PEOPLE</span></div>
-      <div class="cap">VEH 100,1900 → 2400,1750<br>PPL 1500,1250 → 1500,1600</div>
-    </div>
-    <div>
-      <div class="sitehead">
-        <h3>Spadina — Concord frontage</h3>
-        <span class="when">JUL 16 · 6:09 PM EDT · 2.9 MIN</span>
-      </div>
-      <div class="metrics">
-        <div class="m v">
-          <div class="head">Vehicles</div>
-          <div class="raw">30<small>in a 2.9 min window</small></div>
-          <div class="est">≈ 621 / hr<em>projected from the sample above</em></div>
-          <div class="conf">0.65 <span class="meter"><i style="width:65%"></i></span> confidence</div>
-          <div class="classes">28 car · 1 motorcycle · 1 bicycle</div>
-          
-        </div>
-        <div class="m p">
-          <div class="head">People</div>
-          <div class="raw">21<small>in a 2.9 min window</small></div>
-          <div class="est">≈ 434 / hr<em>projected from the sample above</em></div>
-          <div class="conf">0.63 <span class="meter"><i style="width:63%"></i></span> confidence</div>
-          <div class="classes">walking the retail frontage</div>
-          
-        </div>
-      </div>
-      <div class="note">
-        <b>Measured directly outside a unit that's currently for lease.</b> This is the exposure
-        profile of a specific marketed space: roughly 620 vehicles and 434 people past the door per
-        hour at 6pm on a weekday.
-      </div>
-    </div>
-  </article>
-
-  <!-- Front St -->
-  <article class="site">
-    <div class="schem">
-      <div class="tw v"><video class="thumb" data-clip="wellnoon_vehicles" data-site="The Well — Front St frontage" data-stream="Vehicle count" data-stat="24 vehicles · 2.7 min · conf 0.77" muted playsinline preload="metadata" src="clips/wellnoon_vehicles.mp4#t=3"></video><span class="tl">VEHICLES</span></div>
-      <div class="tw p"><video class="thumb" data-clip="wellnoon_people" data-site="The Well — Front St frontage" data-stream="People count" data-stat="18 people · 2.7 min · conf 0.52" muted playsinline preload="metadata" src="clips/wellnoon_people.mp4#t=3"></video><span class="tl">PEOPLE</span></div>
-      <div class="cap">VEH 1600,1300 → 2100,1500<br>PPL 750,550 → 1050,850</div>
-    </div>
-    <div>
-      <div class="sitehead">
-        <h3>The Well — Front St frontage</h3>
-        <span class="when">JUL 14 · 12:15 PM EDT · 2.7 MIN</span>
-      </div>
-      <div class="metrics">
-        <div class="m v">
-          <div class="head">Vehicles</div>
-          <div class="raw">24<small>in a 2.7 min window</small></div>
-          <div class="est">≈ 536 / hr<em>projected from the sample above</em></div>
-          <div class="conf">0.77 <span class="meter"><i style="width:77%"></i></span> confidence</div>
-          <div class="classes">22 car · 2 truck</div>
-          
-        </div>
-        <div class="m p">
-          <div class="head">People</div>
-          <div class="raw">18<small>in a 2.7 min window</small></div>
-          <div class="est">≈ 402 / hr<em>projected from the sample above</em></div>
-          <div class="conf">0.52 <span class="meter"><i style="width:52%"></i></span> confidence</div>
-          <div class="classes">plaza walkway between storefront and road</div>
-          
-        </div>
-      </div>
-      <div class="note">
-        <b>Highest detection confidence in the set at 0.77.</b> A road-and-plaza view rather than a
-        doorway, which is why footfall reads lower here than at the Arcadia entrance a block away.
-      </div>
-    </div>
-  </article>
-
-
-  <div class="shead"><h2>What you can order</h2><span class="hint">fixed scope, plain pricing</span></div>
-  <p class="sub">Three ways to buy a traffic profile for a location. Every one includes the annotated footage and a one-page report.</p>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;">
-    <div style="background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:18px;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--amber);">Snapshot</div>
-      <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:22px;margin:8px 0 2px;">from $300</div>
-      <div style="color:var(--dim);font-size:12.5px;margin-bottom:12px;">one location, one window</div>
-      <div style="font-size:13px;color:#C6D2DB;line-height:1.7;">Vehicles/hr and people/hr at a single spot, plus the annotated clip and a one-page profile.</div>
-    </div>
-    <div style="background:var(--panel);border:1px solid var(--teal);border-radius:10px;padding:18px;position:relative;">
-      <div style="position:absolute;top:-9px;right:14px;background:var(--teal);color:#06201F;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;padding:2px 8px;border-radius:4px;">MOST USEFUL</div>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--teal);">Profile</div>
-      <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:22px;margin:8px 0 2px;">from $700</div>
-      <div style="color:var(--dim);font-size:12.5px;margin-bottom:12px;">one location, peak vs. off-peak</div>
-      <div style="font-size:13px;color:#C6D2DB;line-height:1.7;">The same spot at two times of day &mdash; the contrast that tells you when a location actually performs.</div>
-    </div>
-    <div style="background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:18px;">
-      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--amber);">Corridor</div>
-      <div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:22px;margin:8px 0 2px;">from $2,000</div>
-      <div style="color:var(--dim);font-size:12.5px;margin-bottom:12px;">several units along a block</div>
-      <div style="font-size:13px;color:#C6D2DB;line-height:1.7;">For marketing multiple spaces or assessing a whole site. Scoped per job.</div>
-    </div>
-  </div>
-  <div style="background:var(--panel2);border:1px solid var(--rule);border-radius:10px;padding:24px 22px;margin-bottom:40px;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;">
-    <div>
-      <div style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:500;">Want the traffic profile for your location?</div>
-      <div style="color:var(--dim);font-size:13.5px;margin-top:5px;">Send the address and what you're deciding. You'll get a sample report and a quote back.</div>
-    </div>
-    <a href="mailto:sitelineto@gmail.com?subject=SITELINE%20traffic%20profile%20request&body=Location%2Faddress%3A%0AWhat%20you%20want%20measured%3A%0ATiming%3A" style="background:var(--amber);color:#141414;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14px;padding:12px 20px;border-radius:8px;white-space:nowrap;">Request a report &rarr;</a>
-  </div>
-
-  <!-- ============ METHOD ============ -->
-  <section class="method">
-    <h2>How these were measured</h2>
-    <ul>
-      <li>Aerial video captured over public streets, framed at an oblique angle — steep enough to
-        separate objects, shallow enough for the detector to recognise them.</li>
-      <li>Objects detected and tracked frame to frame, so each subject is <b>counted once</b> as it
-        crosses the line. The line coordinates are printed on every card.</li>
-      <li>People and vehicles are counted <b>in aggregate only</b>. No faces, no plates, no
-        identification of anyone.</li>
-      <li>Confidence is the detector's mean score across the clip. <b>Above 0.5 is usable</b>; lower
-        means objects were small or partly hidden and the count runs conservative.</li>
-    </ul>
-
-    <div class="limits">
-      <h3>What these numbers are not</h3>
-      <ul>
-        <li>Not multi-day averages. Each is a <b>single sample of two to three minutes</b>,
-          projected to an hour for comparison.</li>
-        <li>Not certified counts. Good estimates for a decision, not court-defensible traffic
-          studies.</li>
-        <li>Not directly comparable between sites without care — framing, angle and time of day
-          differ. Same-site comparisons over time are the reliable ones.</li>
-        <li>Dense crowds run <b>under</b>, not over: overlapping people merge and go uncounted.</li>
-      </ul>
-    </div>
-  </section>
-
-  
-  <!-- ===== PRIVACY & LEGALITY ===== -->
-  <section class="method" style="margin-top:24px;">
-    <h2>Privacy &amp; legality</h2>
-    <ul>
-      <li><b>No identification, ever.</b> Footage is framed and altitude-set for counting, not
-        recognition — faces and plates are not resolvable in the source video, and only aggregate
-        counts leave the pipeline.</li>
-      <li><b>Public rights-of-way only.</b> Capture happens over public streets and from rooftop
-        vantage points, not inside private units or through windows.</li>
-      <li><b>Drone flights follow Transport Canada's RPAS rules</b> for the applicable operating
-        category; rooftop-tripod holds require no flight at all.</li>
-      <li><b>Your footage, on request.</b> The annotated clip behind every count is available to the
-        client — nothing is packaged or resold without the site owner's knowledge.</li>
-    </ul>
-  </section>
-
-  <footer>
-    <span>SITELINE &middot; TORONTO &middot; <a href="mailto:sitelineto@gmail.com" style="color:var(--dim)">sitelineto@gmail.com</a></span>
-    <span>MEASURED JUL 13–17, 2026 · 665 CROSSINGS</span>
-  </footer>
 </div>
 
-<!-- ============ LIGHTBOX ============ -->
-<div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbTitle">
-  <div class="lbbox" id="lbbox">
-    <div class="lbtop">
-      <div class="lbtitle" id="lbTitle">Site<span id="lbStream">stream</span></div>
-      <button class="lbx" id="lbClose" aria-label="Close footage">✕</button>
-    </div>
-    <video id="lbVid" controls playsinline preload="none"></video>
-    <div class="lberr" id="lbErr">
-      Clip not found. Generate the proof clips first:<br><br>
-      <code>bash ~/siteline/make_clips.sh</code>
-    </div>
-    <div class="lbfoot">
-      <span id="lbStat">—</span>
-      <span>ANNOTATED EXPORT · 20s EXCERPT · COUNTING LINE IN RED</span>
-    </div>
-  </div>
-</div>
+<footer class="sitefoot">
+  <span>SITELINE · TORONTO</span>
+  <span>MEASURED JUL 13–17, 2026 · 665 CROSSINGS · <a href="mailto:sitelineto@gmail.com">sitelineto@gmail.com</a></span>
+</footer>
 
-<script>
-(function(){
-  const lb    = document.getElementById('lb');
-  const vid   = document.getElementById('lbVid');
-  const err   = document.getElementById('lbErr');
-  const title = document.getElementById('lbTitle');
-  const strm  = document.getElementById('lbStream');
-  const stat  = document.getElementById('lbStat');
-  let lastFocus = null;
-
-  function open(btn){
-    lastFocus = btn;
-    title.childNodes[0].nodeValue = btn.dataset.site;
-    strm.textContent = btn.dataset.stream;
-    stat.textContent = btn.dataset.stat;
-
-    err.style.display = 'none';
-    vid.style.display = 'block';
-    vid.src = 'clips/' + btn.dataset.clip + '.mp4';
-
-    lb.classList.add('on');
-    document.body.classList.add('locked');
-    vid.play().catch(function(){ /* autoplay blocked: controls are there */ });
-    document.getElementById('lbClose').focus();
-  }
-
-  function close(){
-    lb.classList.remove('on');
-    document.body.classList.remove('locked');
-    vid.pause();
-    vid.removeAttribute('src');
-    vid.load();
-    if (lastFocus) lastFocus.focus();
-  }
-
-  vid.addEventListener('error', function(){
-    if (!vid.getAttribute('src')) return;
-    vid.style.display = 'none';
-    err.style.display = 'block';
-  });
-
-
-document.getElementById('lbClose').addEventListener('click', close);
-  lb.addEventListener('click', function(e){ if (e.target === lb) close(); });
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && lb.classList.contains('on')) close();
-  });
-
-  // --- ensure footage thumbnails open the lightbox ---
-  document.querySelectorAll('video.thumb').forEach(function(v){
-    v.style.cursor = 'pointer';
-    v.addEventListener('click', function(e){
-      e.preventDefault();
-      if (v.dataset.clip) { open(v); return; }
-      var card = v.closest('.site');
-      var btn = card ? card.querySelector('.proof') : null;
-      if (btn) btn.click();
-    });
-  });
-
-})();
-</script>
 </body>
 </html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method &amp; Privacy — SITELINE</title>
+<meta name="description" content="How SITELINE measures traffic from aerial footage, what the numbers are and are not, and how privacy and drone-flight legality are handled.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="topbrand" href="index.html"><div class="mark" aria-hidden="true"></div><span>SITELINE</span></a>
+    <div class="toplinks">
+      <a href="index.html">Home</a>
+      <a href="data.html">The Data</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="sample-report.html">Sample Report</a>
+      <a href="method.html" class="active">Method &amp; Privacy</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a class="topcta" href="mailto:sitelineto@gmail.com?subject=SITELINE%20traffic%20profile%20request">Request a report →</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="pagehero">
+    <div class="kicker">The credibility section</div>
+    <h1>How this is measured — and what it isn't</h1>
+    <p>The same honesty that makes a good backtest useful applies here: plain about method, plain
+      about limits. Read this before you buy, not after.</p>
+  </div>
+
+  <section class="method" style="margin-top:0">
+    <h2>How these were measured</h2>
+    <ul>
+      <li>Aerial video captured over public streets, framed at an oblique angle — steep enough to
+        separate objects, shallow enough for the detector to recognise them.</li>
+      <li>Objects detected and tracked frame to frame, so each subject is <b>counted once</b> as it
+        crosses the line. The line coordinates are printed on every card in <a href="data.html" style="color:var(--teal)">the data</a>.</li>
+      <li>People and vehicles are counted <b>in aggregate only</b>. No faces, no plates, no
+        identification of anyone.</li>
+      <li>Confidence is the detector's mean score across the clip. <b>Above 0.5 is usable</b>; lower
+        means objects were small or partly hidden and the count runs conservative.</li>
+    </ul>
+
+    <div class="limits">
+      <h3>What these numbers are not</h3>
+      <ul>
+        <li>Not multi-day averages. Each is a <b>single sample of two to three minutes</b>,
+          projected to an hour for comparison.</li>
+        <li>Not certified counts. Good estimates for a decision, not court-defensible traffic
+          studies.</li>
+        <li>Not directly comparable between sites without care — framing, angle and time of day
+          differ. Same-site comparisons over time are the reliable ones.</li>
+        <li>Dense crowds run <b>under</b>, not over: overlapping people merge and go uncounted.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="method">
+    <h2>Privacy &amp; legality</h2>
+    <ul>
+      <li><b>No identification, ever.</b> Footage is framed and altitude-set for counting, not
+        recognition — faces and plates are not resolvable in the source video, and only aggregate
+        counts leave the pipeline.</li>
+      <li><b>Public rights-of-way only.</b> Capture happens over public streets and from rooftop
+        vantage points, not inside private units or through windows.</li>
+      <li><b>Drone flights follow Transport Canada's RPAS rules</b> for the applicable operating
+        category; rooftop-tripod holds require no flight at all.</li>
+      <li><b>Your footage, on request.</b> The annotated clip behind every count is available to the
+        client — nothing is packaged or resold without the site owner's knowledge.</li>
+    </ul>
+  </section>
+
+  <div class="contactcard" style="margin-top:36px">
+    <h3>Questions about a specific site?</h3>
+    <p>Send the address and what you're deciding — happy to walk through what's measurable and
+      what isn't before you commit to anything.</p>
+    <a class="btn-amber" href="contact.html">Ask a question →</a>
+  </div>
+
+</div>
+
+<footer class="sitefoot">
+  <span>SITELINE · TORONTO</span>
+  <span>MEASURED JUL 13–17, 2026 · 665 CROSSINGS · <a href="mailto:sitelineto@gmail.com">sitelineto@gmail.com</a></span>
+</footer>
+
+</body>
+</html>
